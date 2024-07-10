@@ -1,0 +1,76 @@
+---
+title: "Esercitazione pratica"
+author: "Gaetano Scaduto"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduzione
+
+I seguenti esercizi sono da consegnare entro il giorno precedente alla prossima lezione. Per farli, potete farli in gruppo. Voglio che mi consegnate gli script (file .R) contenenti gli esercizi. Ogni riga di codice **deve essere commentata.** Gli esercizi semplici (\*) e medi (\*\*) sono **obbligatori**, quelli difficili (\*\*\*) sono **facoltativi (ma apprezzati)**. Gli esercizi possono essere risolti in qualunque modo creativo vi venga in mente o che troviate online, anche se non visto a lezione, ma è assolutamente richiesto **che spieghiate dettagliatamente sotto forma di commento il funzionamento del vostro codice**. In sostanza, potete farvi fare tutti gli esercizi da ChatGPT se volete, ma mi dovete dimostrare di aver capito cosa fa il codice.
+
+ Tutti gli esercizi devono essere svolti utilizzando il dataset visto a lezione, che dovrete caricare nell'ambiente Rstudio per svolgere tutti gli esercizi (rivedete il pdf della lezione se non ricordate come si fa e ricordate di caricare la libreria "rio" con il comando library(rio) ). Ricordate anche rimuovere i missing data col comando
+
+```{r, eval=F}
+data = data[complete.cases(data), ] 
+```
+
+Come visto a lezione prima di iniziare a lavorare, altrimenti vi darà errore!
+
+Non abbiate paura se la prima volta che eseguite un comando vi dà errore. Controllate bene di non aver fatto errori di battitura (anche In mErItO al CaSE, maiuscole e minuscole non sono la stessa cosa per R!). Dopodiché, provate a cercare su internet il testo dell'errore (in inglese!). Provate anche a chiedere a chatgtp. Vale tutto!
+
+Ricordate anche di fare molta attenzione al fatto che R è case sensitive, quindi dovete mettere le maiuscole e le minuscole nel modo giusto!
+
+Ricordate anche che non esiste una unica soluzione agli esercizi. Esistono mille modi per fare la stessa cosa. Noi ne abbiamo visti alcuni, ma se ne scoprite di migliori ancora meglio! L'importante non è il modo in cui ci arrivate, ma che troviate delle risposte.
+
+I primi tre comandi che dovrete eseguire sono questi. Ma ricordate che, per funzionare, dovete aver installato la libreria "rio" la scorsa volta con il comando install.packages(). Se l'avete fatto l'altra volta e avete settato la cartella giusta la volta scorsa con il comando setwd() e non avete spostato file, andrà tutto bene.
+
+```{r}
+library(rio)
+data = import("ris2022_lezione.RDS")
+data = data[complete.cases(data), ]
+```
+
+## Esercizio 1\*
+
+-   Utilizzando il comando summary() sul dataset, ispezionate il suo output e riportate, per ogni variabile nel dataset, di che tipo di variabile si tratta (numerica o categoriale).
+
+-   C'è qualche variabile che R "fraintende"? Se sì, quale?
+
+## Esercizio 2\*
+
+-   Per ognuno dei sette partiti presenti nel dataset, calcola la media e la mediana dei voti ricevuti, utilizzando i comandi mean() e median() come visto a lezione.
+
+-   Per quali partiti la media e la mediana sono più diversi? Riesci ad immaginare il perché?
+
+## Esercizio 3\*
+
+-   Utilizzando il comando table() come visto a lezione, in quali regioni fratelli d'italia non è il partito più votato nella maggior parte dei comuni.
+
+    -   Indizio: per farlo, ti servirà incrociare solo due variabili già presenti nel dataset.
+
+-   Forza Italia ha vinto soprattutto nei comuni di una regione in particolare. Sapresti dire quale?
+
+## Esercizio 4\*\*
+
+-   In classe abbiamo visto come la macroarea (nord, centro, sud) spiega il voto ai Cinque Stelle in maniera molto efficace. Replica la regressione univariata vista in classe in cui regredivamo la percentuale presa dai 5 stelle sulla variabile macroarea per un altro partito a tua scelta e confronta i risultati con quelli dei cinque stelle.
+
+    -   Ricorda di caricare la libreria "texreg" col comando library(texreg). Vedi il pdf della lezione.
+
+-   L'R quadro è più alto o più basso? Cosa significa?
+
+-   Come interpreti gli effetti descritti dal modello?
+
+## Esercizio 5\*\*
+
+-   Utilizzando il comando max() trova qual è la massima percentuale presa dal Movimento 5 stelle in un comune.
+
+-   Una volta ottenuto questo numero, usalo per trovare il nome del comune in cui i 5 Stelle hanno preso il massimo
+
+    -   Indizio: puoi usare tanti diversi modi per farlo. Uno lo abbiamo visto a lezione (ma non sta nel pdf). Altri puoi trovarli cercando su internet o ragionandoci un po' su.
+
+-   Che cos'ha questo comune di speciale?

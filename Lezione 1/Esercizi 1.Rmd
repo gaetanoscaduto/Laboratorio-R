@@ -1,0 +1,79 @@
+---
+title: "Esercizi 1"
+author: "Gaetano Scaduto"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Esercizi per casa
+
+I seguenti esercizi sono da consegnare entro il giorno precedente alla prossima lezione. Per farli, potete farli in gruppo. Voglio che mi consegnate gli script (file .R) contenenti gli esercizi. Ogni riga di codice **deve essere commentata.** Gli esercizi semplici e medi sono **obbligatori**, quelli difficili sono **facoltativi (ma apprezzati)**. Gli esercizi possono essere risolti in qualunque modo creativo vi venga in mente o che troviate online, anche se non visto a lezione, ma è assolutamente richiesto **che spieghiate dettagliatamente sotto forma di commento il funzionamento del vostro codice**. In sostanza, potete farvi fare tutti gli esercizi da ChatGPT se volete, ma mi dovete dimostrare di aver capito cosa fa il codice.
+
+## Esercizi Semplici
+
+**Somma, sottrazione, moltiplicazione e divisione**
+
+-   Scrivi uno script R che esegua le seguenti operazioni e stampi i risultati:
+
+    -   Somma di tutti i numeri da 1 a 100 (1+2+3,....,+100).
+
+    -   La media dell'età di tutti i componenti del nucleo familiare di tutti i componenti del vostro grupo (mamma di Luca, mamma di Anna, Luca, Anna, sorella di Luca, sorella di Anna)
+
+**Operatori di confronto**
+
+-   Scrivi uno script R che determini se le seguenti affermazioni sono vere o false:
+
+    -   25 è maggiore di 20 e, contemporaneamente, 40 è minore o uguale di 50
+
+    -   15 è uguale a (20-5) e, contemporaneamente, 1 è diverso da (0\*100=
+
+    -   50 non è uguale a 45 oppure 50 non è uguale a 45+5
+
+## Esercizi di Media Difficoltà
+
+**Creazione e accesso a un DataFrame**
+
+-   Crea un DataFrame con i seguenti dati:
+
+    -   Nomi: "Mario", "Luigi", "Peach"
+
+    -   Età: 30, 25, 28
+
+    -   Città: "Roma", "Milano", "Torino"
+
+-   Stampa il DataFrame, poi stampa solo la colonna "Nomi".
+
+**Filtraggio di un DataFrame**
+
+-   Utilizza il DataFrame `mtcars` di default in R (basta scrivere mtcars su Rstudio, ce l'avete già installato di default). Si tratta di un dataset che contiene generici dati su modelli di auto.
+
+-   Filtra le auto con più di 6 cilindri (`cyl > 6`) e stampa solo il nome del modello e il numero di cilindri.
+
+-   Utilizza il DataFrame `mtcars`. Ordina le auto in base al consumo di carburante (colonna `mpg`) in ordine decrescente e stampa i primi 5 risultati
+
+## Esercizi Avanzati
+
+**Manipolazione avanzata di un DataFrame**
+
+-   Utilizza il DataFrame ***iris*** (anche questo preinstallato su R). Calcola la media della lunghezza del sepalo (sepal.length) per ciascuna specie (Species) e stampa i risultati.
+
+7.  **Unione di DataFrame**
+
+    -   Crea due DataFrame:
+
+        -   DataFrame 1: Nomi: "Anna", "Luca", Età: 28, 34
+
+        -   DataFrame 2: Nomi: "Marco", "Sara", Città: "Napoli", "Firenze"
+
+    -   Unisci i due DataFrame in base alla colonna "Nomi" e stampa il risultato.
+
+        -   Cosa significa "unire" un dataframe? Pensaci bene, scoprilo!
+
+8.  **Creazione di un DataFrame complesso**
+
+    -   Crea un DataFrame con dati simulati per 10 studenti, includendo almeno le seguenti colonne: `Nome`, `Età`, `Punteggio_Matematica`, `Punteggio_Politiche_Pubbliche`. Calcola e aggiungi una nuova colonna con la media dei punteggi per ciascun studente. Ordina il DataFrame in base alla media dei punteggi in ordine decrescente.
+
