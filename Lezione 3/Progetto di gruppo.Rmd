@@ -1,0 +1,14 @@
+---
+title: "Progetto di gruppo"
+author: "Gaetano Scaduto"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Progetto di gruppo
+
+Per l'ultima lezione, mettetevi in gruppi di 3-4 persone (decidete voi con chi). L'obiettivo è quello di preparare una presentazione sulla base di analisi originali che avrete condotto su un dataset su R. Ogni presentazione deve contenere **almeno tre grafici** e **almeno una regressione.** Siete liberi di esplorare quello che più vi interessa e far volare la vostra curiosità come meglio credete. Se volete utilizzare dei dati vostri, di cui siete a conoscenza, o che vi possono tornare utili (magari per la tesi!) sentitevi liber\* di farlo. Altrimenti, potete utilizzare il dataset delle elezioni 2022 o, se preferite, il seguente dataset riguardante invece i risultati delle elezioni europee di quest'anno.

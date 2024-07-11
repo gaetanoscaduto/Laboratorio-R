@@ -2,7 +2,7 @@
 title: "Esercitazione pratica"
 author: "Gaetano Scaduto"
 date: "`r Sys.Date()`"
-output: pdf_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 I seguenti esercizi sono da consegnare entro il giorno precedente alla prossima lezione. Per farli, potete farli in gruppo. Voglio che mi consegnate gli script (file .R) contenenti gli esercizi. Ogni riga di codice **deve essere commentata.** Gli esercizi semplici (\*) e medi (\*\*) sono **obbligatori**, quelli difficili (\*\*\*) sono **facoltativi (ma apprezzati)**. Gli esercizi possono essere risolti in qualunque modo creativo vi venga in mente o che troviate online, anche se non visto a lezione, ma è assolutamente richiesto **che spieghiate dettagliatamente sotto forma di commento il funzionamento del vostro codice**. In sostanza, potete farvi fare tutti gli esercizi da ChatGPT se volete, ma mi dovete dimostrare di aver capito cosa fa il codice.
 
- Tutti gli esercizi devono essere svolti utilizzando il dataset visto a lezione, che dovrete caricare nell'ambiente Rstudio per svolgere tutti gli esercizi (rivedete il pdf della lezione se non ricordate come si fa e ricordate di caricare la libreria "rio" con il comando library(rio) ). Ricordate anche rimuovere i missing data col comando
+Tutti gli esercizi devono essere svolti utilizzando il dataset visto a lezione, che dovrete caricare nell'ambiente Rstudio per svolgere tutti gli esercizi (rivedete il pdf della lezione se non ricordate come si fa e ricordate di caricare la libreria "rio" con il comando library(rio) ). Ricordate anche rimuovere i missing data col comando
 
 ```{r, eval=F}
 data = data[complete.cases(data), ] 

@@ -2,7 +2,7 @@
 title: "R e l'analisi dei dati: una gentile introduzione"
 author: "Gaetano Scaduto"
 date: "`r Sys.Date()`"
-output: pdf_document
+output: slidy_presentation
 ---
 
 ```{r setup, include=FALSE}
@@ -11,13 +11,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduzione a R per l'analisi dati
 
-Questo documento è pensato per chi non è riuscito per problemi tecnici ad installare R nel proprio pc o si è perso qualcosa durante la lezione. I contenuti principali che verranno trattati a lezione sono anche qui, anche se quello che faremo in classe potrebbe essere più approfondito. Le porzioni di testo che vedrete dentro i box sono dei codici che potete tranquillamente copiare e incollare su RStudio, ma sono uguali a quelli che trovate nello script caricato insieme a questo file. Iniziamo.
-
 ## Perché imparare R?
 
-La prima domanda che potreste farvi è: perché dovrei voler imparare R? Qui una serie di ragioni per cui secondo me può valer la pena.
+La prima domanda che potreste farvi è: perché dovrei voler imparare R?
 
--   E' molto richiesto ed apprezzato nel mercato del lavoro.
+Qui una serie di ragioni per cui secondo me può valer la pena.
+
+-   È molto richiesto ed apprezzato nel mercato del lavoro.
 
 -   Imparare R vi libera sostanzialmente dalla necessità di imparare qualunque altro software statistico
 
@@ -39,23 +39,40 @@ Quali sono i contro di usare R?
 
 -   Forse verremmo tutti spazzati via da ChatGTP, boh
 
-Un consiglio che vi posso dare per chi avesse voglia è seguire [questo libro qui](https://r4ds.hadley.nz/), che è disponibile, in una versione leggermente più datata, [anche in italiano](https://it.r4ds.hadley.nz/). Se vi studiate questo libro (che è fatto super bene ed è **gratis e disponibile online**, come tutto quello che viene fatto dalla splendida commuity di R) non vi ferma nessuno. Ed è molto facile da studiare da soli. Iniziamo!
+-   **Consiglio:** seguire [questo libro qui](#0)
+
+    -   Se vi studiate questo libro (che è fatto super bene ed è **gratis e disponibile online**) non vi ferma nessuno. Ed è molto facile da studiare da soli. Iniziamo!
+
+    ```{=html}
+    <!-- -->
+    ```
+    -   Disponibile, in una versione leggermente più datata, [anche in italiano](#0).
 
 ### Nota sull'utilizzo di ChatGPT e simili
 
-Per quanto mi riguarda, da ora e per tutto il corso, sentitevi liberi di utilizzare **ChatGPT** (o qualunque altro modello di intelligenza artificiale) per risolvere ogni problema che dovesse saltare fuori con R. In particolare, ogni volta che riscontrate un errore:
+Sentitevi liberi di utilizzare **ChatGPT** (o qualunque altro modello di intelligenza artificiale) per risolvere ogni problema che dovesse saltare fuori con R.
+
+In particolare, ogni volta che riscontrate un errore:
 
 -   Prima, leggete l'errore dal vostro computer e vedete se riuscite a capire cosa succede
 
 -   Poi, chiedete a ChatGPT di spiegarvi l'errore, con una formula come [questa](https://chatgpt.com/share/ef997ffe-4d29-4372-a399-94158ba7c856).
 
+    -   Ricordate di dare più **contesto** possibile a ChatGPT nel prompt!
+
 -   Se anche dopo la risposta di ChatGPT non siete in grado di capire l'errore, scrivetemi una mail (gaetano.scaduto\@unimib.it)
 
-Notate anche che potrete usare ChatGPT in qualunque fase di questo laboratorio. Non è assolutamente un problema, anzi è incoraggiato. Ciononostante, voglio che siate **trasparenti** ogni volta che lo utilizzate è bene che lo indichiate esplicitamente (ad esempio, con un #commento) e che siate in grado di **spiegare** il funziomento del codice.
+-   **NOTA**: potrete usare ChatGPT in qualunque fase di questo laboratorio. Non è assolutamente un problema, anzi vi incoraggio a farlo.
 
-# Primissimi passi
+    -   Ciononostante, voglio che siate **trasparenti** ogni volta che lo utilizzate è bene che lo indichiate esplicitamente (ad esempio, con un #commento) e che siate in grado di **spiegare** il funziomento del codice.
 
-## Comandi di Base
+    ## Nota su questi documenti
+
+-   Questi documenti, che sono slide o dispense, come preferite, contengono porzioni di testo e di codice.
+
+-   Sono pensate per essere utilizzate in classe per seguire la lezione o a casa per lo studio individuale, ma è **importante che teniate sempre RStudio aperto** mentre studiate, e facciate andare i comandi che vedete anche sul vostro computer!
+
+# Comandi di Base
 
 Iniziamo con alcuni comandi di base in R.
 
@@ -115,6 +132,8 @@ TRUE | FALSE
 
 ```
 
+# Strutture di dati
+
 ### Strutture di Dati: Variabili
 
 Variabili In R, possiamo memorizzare valori in **variabili**.
@@ -131,7 +150,9 @@ Quando memorizzate un valore in una variabile, questa comparirà nel vostro **en
 
 ![](images/clipboard-3992396063.png)
 
-Una volta che un valore è salvato in una variabile, tutte le volte che avrete bisogno di "evocare" il valore contenuto nella variabile, basterà chiamare il nome della variabile stessa. Ad esempio, se volessi porre [questa domanda](https://it.wikipedia.org/wiki/Risposta_alla_domanda_fondamentale_sulla_vita,_l'universo_e_tutto_quanto)....
+Una volta che un valore è salvato in una variabile, tutte le volte che avrete bisogno di "evocare" il valore contenuto nella variabile, basterà chiamare il nome della variabile stessa.
+
+Ad esempio, se volessi porre [questa domanda](https://it.wikipedia.org/wiki/Risposta_alla_domanda_fondamentale_sulla_vita,_l'universo_e_tutto_quanto)....
 
 ```{r}
 domanda
@@ -143,24 +164,42 @@ Potrei poi darmi una risposta chiamando la variabile ***risposta***
 risposta
 ```
 
-In più, posso fare con le variabili tutte le operazioni di cui abbiamo parlato in precedenza. Per esempio, consideriamo queste due variabili.
+In più, posso fare con le variabili tutte le operazioni di cui abbiamo parlato in precedenza.
+
+Per esempio, consideriamo queste due variabili.
 
 ```{r}
 pigreco=3.1415
 costante_gravitazionale=9.81
 ```
 
-Posso fare tante cose con queste due variabili: sommarle, moltiplicarle, confrontarle...
+Posso fare tante cose con queste due variabili:
+
+-   sommarle
 
 ```{r}
 pigreco+costante_gravitazionale
-pigreco*costante_gravitazionale
+```
+
+-   pigreco+costante_gravitazionaleMoltiplicarle
+
+    ```{r}
+    pigreco*costante_gravitazionale
+    ```
+
+-   Confrontarle...
+
+```{r}
 pigreco>costante_gravitazionale
 ```
 
 ### Strutture di Dati: Vettori
 
-Un vettore è una **sequenza di dati** dello stesso tipo (esempio: numerico, testuale). Per creare un vettore si utilizza il comando ***c(),*** inserendo gli elementi del vettore separati da una virgola.
+-   Un vettore è una **sequenza di dati** dello stesso tipo (esempio: numerico, testuale).
+
+-   Per creare un vettore si utilizza il comando ***c(),***
+
+    -   Inserendo gli elementi del vettore separati da una virgola.
 
 ```{r}
 # Vettore numerico
@@ -170,7 +209,11 @@ voti
 
 ```
 
-Per chiamare uno specifico valore all'interno del vettore, si usano le parentesi quadre e si indica, con un numero, la posizione dell'elemento che vogliamo estrarre. Ad esempio, se volessi sapere cosa contiene il primo elemento del vettore ***voti,*** dovrei scrivere:
+-   Per chiamare uno specifico valore all'interno del vettore, si usano le **parentesi quadre**
+
+    -   Al loro interno si indica, con un numero, la posizione dell'elemento che vogliamo estrarre.
+
+Ad esempio, se volessi sapere cosa contiene il primo elemento del vettore ***voti,*** dovrei scrivere:
 
 ```{r}
 voti[1]
@@ -188,7 +231,9 @@ E se volessi sommarli...
 voti[1]+voti[3]
 ```
 
-I vettori possono anche avere valori non numerici. Ad esempio, possiamo creare un vettore di stringhe
+-   I vettori possono anche avere valori non numerici.
+
+Ad esempio, possiamo creare un vettore di stringhe
 
 ```{r}
 # Vettore di stringhe
@@ -203,9 +248,11 @@ esiti[3]
 esiti[c(1,3)]
 ```
 
-## Il Dataframe
+# Il Dataframe
 
-Un DataFrame è una struttura di dati fondamentale in R che è molto simile a una tabella di dati. Ogni colonna di un DataFrame può contenere un diverso tipo di dati (numerico, stringhe, ecc.), e tutte le colonne **devono avere la stessa lunghezz**a.
+Un DataFrame è una struttura di dati fondamentale in R. È molto simile a una tabella di dati.
+
+-   Ogni colonna di un DataFrame può contenere un diverso tipo di dati (numerico, stringhe, ecc.), e tutte le colonne **devono avere la stessa lunghezz**a.
 
 Potete creare un DataFrame utilizzando la funzione ***data.frame()***. Ecco un esempio:
 
@@ -223,6 +270,12 @@ Per visualizzare il dataframe abbiamo varie opzioni, la più completa è la funz
 ```{r}
 View(dati)
 
+```
+
+In alternativa, un modo pratico per capire la struttura del dataset è visualizzarne solo le prime righe con il comando *head()*
+
+```{r}
+head(dati)
 ```
 
 ### Accesso ai Dati in un DataFrame
@@ -251,7 +304,7 @@ dati[1, 2]
 
 ```
 
-**NOTA BENE:** il primo indice è sempre l'indice di riga, il secondo indice è sempre l'indice di colonna
+**NOTA BENE:** il primo indice è sempre l'indice di **riga**, il secondo indice è sempre l'indice di **colonna**
 
 ### Modifica di un DataFrame
 
@@ -284,13 +337,13 @@ nuova_riga <- data.frame(   nomi = "Giulia",   eta = 26,   città = "Torino",   
 # Aggiungere la nuova riga al DataFrame esistente 
 dati <- rbind(dati, nuova_riga)  # Visualizzare il DataFrame aggiornato 
 View(dati) 
-
-
 ```
 
 ### Operazioni sui DataFrame
 
 I DataFrame in R supportano una vasta gamma di operazioni. Ecco alcune delle più comuni:
+
+#### Filtrare i dati
 
 ```{r}
 # Filtrare le righe dove "eta" è maggiore di 30 
@@ -316,7 +369,7 @@ print(dati_selezionati)
 
 ```
 
-### Esempio Pratico
+# Esempio Pratico
 
 Mettiamo insieme tutto ciò che abbiamo imparato in un esempio pratico.
 
@@ -352,4 +405,3 @@ print(nomi_città)
 
 
 ```
-

@@ -2,16 +2,35 @@
 title: "Lezione 2"
 author: "Gaetano Scaduto"
 date: "`r Sys.Date()`"
-output: pdf_document
+output: slidy_presentation
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
 ```
 
-# Un esempio con un vero Dataset
+# Lavoriamo con un vero Dataset
 
-R si basa su una filosofia open source. Alcune cose le avete "comprese nel pacchetto base", altre cose le scaricate da un [archivio online](https://cran.r-project.org/). Si tratta di "pacchetti" che vi permettono di espandere le funzionalità base di R. Prima di utilizzare un pacchetto per la prima volta, **solo per la prima volta**, dovete installarlo. Per installarlo vi serve una **connessione ad internet** ed eseguire il comando ***install.packages()***. Noi per questa lezione useremo tre pacchetti **rio**, **ggplot2 e texreg.** Per installarli, si usa la seguente sintassi.
+-   R si basa su una filosofia open source.
+
+    -   Alcune cose le avete "comprese nel pacchetto base",
+
+    -   Altre cose le scaricate da un [archivio online](https://cran.r-project.org/).
+
+        -   Si tratta di "**pacchetti**" che vi permettono di espandere le funzionalità base di R.
+
+Prima di utilizzare un pacchetto per la prima volta, **solo per la prima volta**, dovete installarlo.
+
+-   Per installarlo vi serve una **connessione ad internet** ed eseguire il comando ***install.packages()***.
+
+    -   Noi in questa e nella prossima lezione useremo tre pacchetti
+
+        -   **rio**,
+
+        -   **ggplot2 e texreg**
+
+Per installare i pacchetti, si usa la seguente sintassi.
 
 ```{r, eval=FALSE}
 install.packages("rio")
@@ -20,7 +39,9 @@ install.packages("texreg") #Nota: questo, dopo il cancelletto, è un commento.
 #I commenti sono porzioni di testo che il computer non guarda, servono a noi umani per arricchire il codice con spiegazioni e appunti
 ```
 
-Dopo aver installato, dovete chiamare la libreria. Questo va fatto **ogni volta che riavviate R** con il comando **library**
+Dopo aver installato, dovete chiamare la libreria.
+
+-   Questo va fatto **ogni volta che riavviate R** con il comando **library.**
 
 ```{r, warning = F}
 
@@ -29,7 +50,9 @@ library(ggplot2)
 library(texreg)
 ```
 
-Un ultima finezza. Voglio i numeri con la virgola, non la notazione scientifica. Per farlo, dico a R questa cosa.
+Un ultima finezza. Voglio i numeri con la virgola, non la notazione scientifica.
+
+Per farlo, dico a R questa cosa.
 
 ```{r, warning = F}
 options(scipen = 999)
@@ -37,27 +60,39 @@ options(scipen = 999)
 
 # Importare un file
 
-La libreria rio (che sta per R Input/Output) vi permette di importare file su R senza sbatti. Nel nostro caso io vi ho preparato un dataset coi **risultati delle elezioni del 2022 su tutti i comuni italiani** più qualche altra info. Questo dataset è basato sugli open data del ministero degli interni che sono stati da me manipolati un po' e uniti con un tot di statistiche dell'ISTAT. Per importarlo in R dovete fare le seguenti cose:
+La libreria rio (che sta per R Input/Output) vi permette di importare file su R senza sbatti.
+
+Nel nostro caso io vi ho preparato un dataset coi **risultati delle elezioni del 2022 su tutti i comuni italiani** più qualche altra info.
+
+-   Questo dataset è basato sugli open data del ministero degli interni che sono stati da me manipolati un po' e uniti con un tot di statistiche dell'ISTAT.
+
+Per importarlo in R dovete fare le seguenti cose:
 
 -   Create una cartella da qualche parte nel vostro computer e dategli un nome
 
--   In quella cartella, metteteci il dataset che vi abbiamo caricato online. Potete anche solo copiarlo e incollarlo all'interno di quella cartella.
+-   In quella cartella, metteteci il dataset che vi abbiamo caricato online.
 
-Dopodiché dovrete dire ad R che state lavorando in quella cartella. Per farlo, dovrete eseguire il comando "setwd()" (che sta per "set working directory") e mettere, tra virgolette, il percorso della cartella.
+    -   Potete anche solo copiarlo e incollarlo all'interno di quella cartella.
 
--   Per trovare il percorso della cartella, se avete windows basta fare tasto destro sulla cartella e poi "copia come percorso"
+-   Dopodiché dovrete dire ad R che state lavorando in quella cartella.
 
--   Se avete Mac cercate su google "come copiare percorso cartella Mac", ma secondo me potete vedere da "proprietà" col tasto destro o qualcosa del genere. Io ho provato a cercare su google ma mica l'ho capito.
+    -   Per farlo, dovrete eseguire il comando "setwd()" (che sta per "set working directory") e mettere, tra virgolette, il **percorso della cartella**.
 
-    -   Se proprio non riuscite: uscite da R e **cliccate sul file del dataset due volte**. Se intendete imparare come si usa R questa cosa non va bene, ma per sta volta passi...
+        -   Per trovare il percorso della cartella, se avete windows basta fare tasto destro sulla cartella e poi "copia come percorso"
 
--   **Attenzione! Se lo fate su windows, quello che vi copierà sarà così**
+        -   Se avete Mac cercate su google "come copiare percorso cartella Mac", ma secondo me potete vedere da "proprietà" col tasto destro o qualcosa del genere.
 
--   "C:\\Users\\gasca\\OneDrive - Università degli Studi di Milano-Bicocca\\Desktop\\cartella esempio"
+            -   Se proprio non riuscite: **uscite da R e** **cliccate sul file del dataset due volte**. Se intendete imparare come si usa R questa cosa non va bene, ma per sta volta passi...
 
--   R per uno strano motivo vuole che le stanghette non siano \\ ma /, quindi voi dovrete cambiarle manualmente così
+-   **Attenzione! Se diete su windows, quello che vi copierà sarà così:**
 
--   C:/Users/gasca/OneDrive - Università degli Studi di Milano-Bicocca/Desktop/cartella esempio
+    -   "C:\\Users\\gasca\\OneDrive - Università degli Studi di Milano-Bicocca\\Desktop\\cartella esempio"
+
+    -   R per uno strano motivo vuole che le stanghette non siano "\\" ma "/", quindi voi dovrete cambiarle manualmente e scrivere invece
+
+        ```{r, eval=FALSE}
+        setwd("C:/Users/gaetanoscaduto/OneDrive - Università degli Studi di Milano-Bicocca/Desktop/cartella esempio")
+        ```
 
 Quindi il comando sarà:
 
@@ -66,7 +101,11 @@ Quindi il comando sarà:
 setwd("C:/Users/gaetanoscaduto/OneDrive - Università degli Studi di Milano-Bicocca/Desktop/cartella esempio")
 ```
 
-Una volta fatto ciò, eseguite il seguente comando (non dimenticate le virgolette ""!)
+```{r, eval=FALSE}
+setwd("C:/Users/gasca/OneDrive - Università degli Studi di Milano-Bicocca/Dottorato/Didattica/Lab 2024/Laboratorio-R/Lezione 2")
+```
+
+Una volta fatto ciò, eseguite il seguente comando (non dimenticate le virgolette ""!) per importare il dataframe nel vostro ambiente.
 
 ```{r, warning = F}
 data = import("ris2022_lezione.RDS")
@@ -74,7 +113,17 @@ data = import("ris2022_lezione.RDS")
 
 -   NOTA: se avete fatto doppioclic sul dataset dalla cartella (per quelli che non trovavano come copiare il percorso della cartella), il comando di sopra non eseguitelo!
 
-In questo caso state dicendo ad R: prendi l'oggetto chiamato nel modo dentro le virgolette (dalla cartella che gli abbiamo detto prima), importamelo su R e chiamalo, da ora in poi "data". "data" è il nome con cui chiameremo i nostri dati. Notate che dovrete sempre riportare il nome del file che volete importare **compreso di estensione.** Con la funzione import() (che fa parte di rio) potete importare senza problemi sostanzialmente qualunque tipo di data file esistente. Anche un foglio excel.
+In questo caso state dicendo ad R:
+
+-   Prendi l'oggetto chiamato nel modo dentro le virgolette (dalla cartella che gli abbiamo detto prima), importamelo su R e chiamalo, da ora in poi "data".
+
+    -   "data" è il nome con cui chiameremo i nostri dati.
+
+-   Notate che dovrete sempre riportare il nome del file che volete importare **compreso di estensione (.RDS).**
+
+-   Con la funzione import() (che fa parte di rio) potete importare senza problemi sostanzialmente qualunque tipo di data file esistente.
+
+    -   Anche un foglio excel, ad esempio.
 
 Nota: questo dataset ha qualche dato mancante. Per semplicità noi lavoreremo coi dati completi. Rimuovo quindi tutte le righe che hanno "missing data" con questo comando.
 
@@ -98,31 +147,47 @@ Se vogliamo velocemente un sommario di quello che contine il dataset, possiamo e
 summary(data)
 ```
 
-Adesso andiamo a vedere qualche statistica nello specifico. Per fare così, dovremo "chiamare" direttamente le colonne del dataset. Per farlo si usa l'operatore ***\$*** dopo il nome del dataset (ad esempio ***data\$istat***). Rstudio vi suggerirà poi lui stesso i nomi delle colonne disponibili di modo che possiate accedere a queste. Calcoliamoci qualche statistica di base come esempio. Tipo la media del numero di residenti nei comuni del nostro dataset con il comando ***mean()**.*
+Adesso andiamo a vedere qualche statistica nello specifico.
+
+-   Per farlo dovremo "chiamare" direttamente le colonne del dataset.
+
+    -   Si usa l'operatore ***\$*** dopo il nome del dataset (ad esempio ***data\$istat***).
+
+    -   Rstudio vi suggerirà poi lui stesso i nomi delle colonne disponibili di modo che possiate accedere a queste.
+
+Calcoliamoci qualche statistica di base come esempio.
+
+-   Tipo la media del numero di residenti nei comuni del nostro dataset
+
+    -   Per calcolare la media, si usa il comando ***mean()**.*
 
 ```{r, warning = F}
 mean(data$num_residenti)
 ```
 
-Oppure la mediana
+Oppure la mediana, con il comando ***median()***
 
 ```{r, warning = F}
 median(data$num_residenti)
 ```
 
-Oppure ci chiediamo: "ma nel comune dove il Movimento 5 Stelle ha preso la percentuale più alta, ma quanto ha preso?". La risposta è data da questo comando.
+Oppure ci chiediamo: "ma nel comune dove il Movimento 5 Stelle ha preso la percentuale più alta, ma quanto ha preso?".
+
+-   La risposta è data dal comando ***max()*** sulla variabile (colonna) che esprime la percentuale di voto ai 5 Stelle.
 
 ```{r, warning = F}
 max(data$M5S)
 ```
 
-Se invece ci chiedessimo quanto è piccolo il più piccolo comune che abbiamo nel dataset...
+-   Se invece ci chiedessimo quanto è piccolo il più piccolo comune che abbiamo nel dataset
+
+    -   Utilizziamo la variabile *superficie*.
 
 ```{r, warning = F}
 min(data$superficie)
 ```
 
-Adesso ci chiediamo se, per esempio, la media del numero di voti presi da Forza Italia nei comuni della Calabria è diversa da quella dei comuni in Umbria
+Adesso ci chiediamo se, per esempio, la media del numero di voti presi da Forza Italia nei comuni della Calabria è diversa da quella dei comuni in Umbria.
 
 ```{r, warning = F}
 mean(data[data$regione == "Calabria", ]$Fi)
@@ -130,15 +195,21 @@ mean(data[data$regione == "Calabria", ]$Fi)
 mean(data[data$regione == "Umbria", ]$Fi)
 ```
 
-# Le tabelle
+# Le Tabelle
 
-Adesso vedremo un po' di tabelle. Le tabelle possono essere molto utili per capire come si distribuiscono i nostri dati. Possiamo fare tabelle con una variabile sola o con due variabili, ed in entrambi i casi si usa il comando "table". Vediamo ad esempio come è distribuita la variabile ***areeint*** (codice aree interne istat - indica la perifericità del comune: A è un comune centrale, F è un comune sperduto).
+-   Le tabelle possono essere molto utili per capire come si distribuiscono i nostri dati.
+
+-   Possiamo fare tabelle con una variabile sola o con due variabili, ed in entrambi i casi si usa il comando "table".
+
+-   Vediamo ad esempio come è distribuita la variabile ***areeint***
+
+    -   (codice aree interne istat - indica la perifericità del comune: A è un comune centrale, F è un comune sperduto).
 
 ```{r, warning = F}
 table(data$areeint)
 ```
 
-Se vogliamo creare una tabella di due variabili incrociate, allora basta metterle in table separate da una virgola.
+-   Se vogliamo creare una tabella di due variabili incrociate, basta metterle nel comando ***table()*** separate da una virgola.
 
 ```{r, warning = F}
 table(data$macroarea, data$areeint)
@@ -151,13 +222,25 @@ Questa tabella non è molto informativa, possiamo pensare a fare una tabella con
 prop.table(table(data$macroarea, data$areeint))
 ```
 
-Non si capisce niente! Troppe cifre decimali! Risolviamo con la funzione "round" dicendogli di arrotondare a due cifre soltanto.
+Non si capisce niente! Troppe cifre decimali!
+
+-   Risolviamo con la funzione "round", che ci permette di arrotondare i decimali a quante cifre vogliamo
+
+    -   Noi vogliamo due cifre soltanto.
 
 ```{r, warning = F}
 round(prop.table(table(data$macroarea, data$areeint)), digits = 2)
 ```
 
-Queste sono le percentuali su tutta la tabella. Forse sarebbe più utile averle per riga o per colonna. Per fare così dobbiamo aggiungere a prop.table un'opzione. 1 corrisponde alle percentuali per riga. 2 alle percentuali per colonna.
+-   Queste sono le percentuali su tutta la tabella.
+
+-   Forse sarebbe più utile averle per riga o per colonna.
+
+    -   Per farlo dobbiamo aggiungere a prop.table un'opzione.
+
+        -   1 corrisponde alle percentuali per riga.
+
+        -   2 alle percentuali per colonna.
 
 ```{r, warning = F}
 round(prop.table(table(data$macroarea, data$areeint), 1), digits = 2)
@@ -169,57 +252,35 @@ round(prop.table(table(data$macroarea, data$areeint), 2), digits = 2)
 
 ```
 
-# Grafici
-
-Per i grafici noi usiamo la libreria ggplot2. Secondo me è il modo migliore. Ggplot2 ha un linguaggio un po' criptico. Limitatevi per adesso a copia-incollare i comandi. Per i più audaci in assoluto, gli stessi che hanno scritto il libro su R hanno anche scritto il libro su ggplot2 ([QUI](https://ggplot2-book.org/)) Anche qui, per capire ci vuole tanta pazienza, ma basta cogliere l'idea per adesso. Ad esempio, proviamo a vedere come sono distribuiti i voti al PD.
-
-```{r, warning = F}
-ggplot(data, aes(x=PD))+
- geom_density()
-```
-
-Proviamo a fare un **diagramma a barre** (barplot) sul partito più votato in tutti i comuni
-
-```{r, warning = F}
-ggplot(data, aes(x=most_voted))+
-  geom_bar()
-```
-
-Se le volessi colorate queste barre, scriverei così
-
-```{r, warning = F}
-ggplot(data, aes(x=most_voted))+
-  geom_bar(aes(fill=most_voted))
-```
-
-Vogliamo provare a vedere se c'è una correlazione fra il numero di abitanti in un comune ed il fatto che il pd sia il partito più votato. Proviamo con geom_point()
-
-```{r, warning = F}
-ggplot(data, aes(x=PD, y=num_residenti))+
-  geom_point()
-```
-
-Così non si capisce molto. Posso provare a prendere il logaritmo della variabile numero di residenti.
-
-```{r, warning = F}
-ggplot(data, aes(x=PD, y=log(num_residenti)))+
-  geom_point()
-
-```
-
-Già meglio! Ma se volessi provare a vedere una retta di regressione lì in mezzo?
-
-```{r, warning = F}
-ggplot(data, aes(x=PD, y=log(num_residenti)))+
-  geom_point(alpha=1/10)+
-  geom_smooth(method="lm")
-```
-
-Carino!
-
 # La regressione!
 
-Finiamo la nostra carrellata con qualche regressione. Qui faremo solo regressioni lineari. Supponiamo di voler provare a costruire un modello che spiega il voto al movimento cinque stelle. Facciamo quindi una serie di regressioni lineari, che si fanno col comando "lm". Il primo argomento di "lm" è "data=nomemiodataset" (nel nostro caso sfortunato il nostro dataset si chiama proprio data). Poi mettete la variabile dipendente, una tilde \~ (Alt+126) e poi le variabili indipendenti. Salvate tutto il risultato in un oggetto e osservate i risultati della vostra regressione mettendo l'oggetto in una funzione screenreg(). Partiamo da un modello celeberrimo: "i cinque stelle partito del sud"
+-   Finiamo la nostra carrellata con qualche regressione.
+
+-   Sappiamo tutti cos'è la regressione?
+
+    -   Per chi ha bisogno di un ripasso, ho fatto una veloce guida per un altro corso qualche anno fa. Potete scaricarla [qui](https://github.com/gaetanoscaduto/teaching/blob/main/Regressione%20PP/Dispensa.pdf)
+
+-   Qui faremo solo regressioni lineari.
+
+-   Supponiamo di voler provare a costruire un modello che spiega il voto al Movimento 5 stelle.
+
+-   Le regressioni lineari si fanno col comando "lm".
+
+    -    Il primo argomento di "lm" è "data=nome_mio_dataset" (nel nostro caso sfortunato il nostro dataset si chiama proprio data).
+
+    -   Poi mettete la variabile dipendente, la vostra y
+
+    -   Dopodiché, mettete una tilde \~ (Alt+126)
+
+    -   Infine, le variabili indipendenti.
+
+    -   Salvate tutto il risultato in un oggetto
+
+    -   Osservate i risultati della vostra regressione mettendo l'oggetto in una funzione ***screenreg()***.
+
+        -   NOTA: ***screenreg()*** funziona solo se avete chiamato la libreria texreg prima con il comando ***library()*** prima!
+
+    -   Partiamo da un modello celeberrimo: "i cinque stelle partito del sud"
 
 ```{r, warning = F}
 regr1 = lm(data=data, M5S ~ macroarea)
@@ -242,10 +303,8 @@ regr3 = lm(data=data, M5S ~ macroarea + areeint + num_residenti + superficie)
 screenreg(regr3)
 ```
 
-Qui termina la nostra lezione. Di nuovo: non vi spaventate. R è difficile. Adesso sapete che esiste. Se un domani vorrete (o dovrete) impararlo il mio consiglio è di essere pazienti e non arrabbiarvi. Dopo un po' ce la si fa e ne vale la pena.
+Qui termina la nostra lezione. Di nuovo: non vi spaventate. R è difficile. Adesso sapete che esiste. Se volete impararlo bene, il mio consiglio è di essere pazienti e non arrabbiarvi. Dopo un po' ce la si fa e ne vale la pena.
 
-Per qualunque cosa non esitate a scrivermi a **g.scaduto2\@campus.unimib.it**
+Per qualunque cosa non esitate a scrivermi a gaetano.scaduto\@unimib.it
 
 Ciao!
-
-PS: questo intero documento è stato scritto su RStudio.
