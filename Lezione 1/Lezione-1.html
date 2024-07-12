@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Gaetano Scaduto" />
-  <meta name="date" content="2024-07-11" />
+  <meta name="date" content="2024-07-12" />
   <title>R e l’analisi dei dati: una gentile introduzione</title>
   <style type="text/css">
 code{white-space: pre-wrap;}
@@ -527,31 +527,32 @@ introduzione</h1>
   <p class="author">
 Gaetano Scaduto
   </p>
-  <p class="date">2024-07-11</p>
+  <p class="date">2024-07-12</p>
 </div>
 <div id="introduzione-a-r-per-lanalisi-dati" class="slide section level1">
 <h1>Introduzione a R per l’analisi dati</h1>
 <h2 id="perché-imparare-r">Perché imparare R?</h2>
 <p>La prima domanda che potreste farvi è: perché dovrei voler imparare
 R?</p>
-<p>Qui una serie di ragioni per cui secondo me può valer la pena.</p>
 <ul>
-<li><p>È molto richiesto ed apprezzato nel mercato del lavoro.</p></li>
-<li><p>Imparare R vi libera sostanzialmente dalla necessità di imparare
-qualunque altro software statistico</p></li>
+<li><p>È molto <strong>richiesto</strong> ed <strong>apprezzato</strong>
+nel mercato del lavoro.</p></li>
+<li><p>Imparare R vi <strong>libera</strong> dalla necessità di imparare
+qualunque altro software statistico.</p></li>
 <li><p>Al contrario di tutti gli altri, è
-<strong>gratis</strong></p></li>
-<li><p>Vi potrà facilitare in tutta una serie di compiti che ancora non
-sapete nemmeno di dover affrontare nella vostra vita
-professionale.</p></li>
+<strong>gratis.</strong></p></li>
+<li><p>Vi potrà <strong>facilitare</strong> in tutta una serie di
+compiti che ancora non sapete nemmeno di dover affrontare nella vostra
+vita professionale.</p></li>
 </ul>
-<p>Quali sono i contro di usare R?</p>
+<p>Quali sono i <strong>contro</strong> di usare R?</p>
 <ul>
 <li><p>All’inizio, è <strong>difficile da imparare</strong>, soprattutto
 se non avete mai programmato prima. Bisogna essere pazienti e non
 arrabbiarsi, piano piano ce la si fa.</p></li>
 <li><p>Nella vostra vita professionale potreste far parte di una
-minoranza, e dovete esser pronti ad essere un po’ dei lupi solitari</p>
+<strong>minoranza</strong>, e dovete esser pronti ad essere un po’ dei
+lupi solitari</p>
 <ul>
 <li><p>In azienda si usa di più <strong>Tableau, SPSS o
 Python</strong></p></li>
@@ -578,13 +579,23 @@ altro modello di intelligenza artificiale) per risolvere ogni problema
 che dovesse saltare fuori con R.</p>
 <p>In particolare, ogni volta che riscontrate un errore:</p>
 <ul>
-<li><p>Prima, leggete l’errore dal vostro computer e vedete se riuscite
-a capire cosa succede</p></li>
-<li><p>Poi, chiedete a ChatGPT di spiegarvi l’errore, con una formula
-come <a href="https://chatgpt.com/share/ef997ffe-4d29-4372-a399-94158ba7c856">questa</a>.</p>
+<li><p>Prima, <strong>leggete l’errore</strong> dal vostro computer e
+vedete se riuscite a capire cosa succede</p></li>
+<li><p>Poi, chiedete a ChatGPT di <strong>spiegarvi l’errore</strong>,
+con una formula come <a href="https://chatgpt.com/share/ef997ffe-4d29-4372-a399-94158ba7c856">questa</a>.</p>
 <ul>
-<li>Ricordate di dare più <strong>contesto</strong> possibile a ChatGPT
-nel prompt!</li>
+<li><p>Ricordate di dare più <strong>contesto</strong> possibile a
+ChatGPT nel prompt! In particolare, includete sempre:</p>
+<ul>
+<li>Una descrizione del problema che state cercando di risolvere (date
+sempre più contesto possibile!)</li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Il codice che avete scritto.</p></li>
+<li><p>L’errore specifico che avete ricevuto (copiaincollato).</p></li>
+<li><p>Una richiesta esplicita di aiuto e spiegazione.</p></li>
+</ul></li>
 </ul></li>
 <li><p>Se anche dopo la risposta di ChatGPT non siete in grado di capire
 l’errore, scrivetemi una mail (gaetano.scaduto@unimib.it)</p></li>
@@ -602,62 +613,61 @@ esempio, con un #commento) e che siate in grado di
 contengono porzioni di testo e di codice.</p></li>
 <li><p>Sono pensate per essere utilizzate in classe per seguire la
 lezione o a casa per lo studio individuale, ma è <strong>importante che
-teniate sempre RStudio aperto</strong> mentre studiate, e facciate
-andare i comandi che vedete anche sul vostro computer!</p></li>
+teniate sempre RStudio aperto</strong> mentre studiate e seguite, e
+facciate andare i comandi che vedete anche sul vostro computer!</p></li>
 </ul>
 </div>
 <div id="comandi-di-base" class="slide section level1">
 <h1>Comandi di Base</h1>
 <p>Iniziamo con alcuni comandi di base in R.</p>
 <h3 id="operazioni-aritmetiche">Operazioni Aritmetiche</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Somma</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<h4 id="somma">Somma</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Sottrazione</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">4</span></span></code></pre></div>
+<h4 id="sottrazione">Sottrazione</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Moltiplicazione</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="dv">7</span> <span class="sc">*</span> <span class="dv">3</span></span></code></pre></div>
+<h4 id="moltiplicazione">Moltiplicazione</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="dv">7</span> <span class="sc">*</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 21</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Divisione</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="dv">20</span> <span class="sc">/</span> <span class="dv">5</span></span></code></pre></div>
+<h4 id="divisione">Divisione</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="dv">20</span> <span class="sc">/</span> <span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <h3 id="operatori-di-confronto">Operatori di Confronto</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Uguaglianza</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="dv">5</span> <span class="sc">==</span> <span class="dv">5</span></span></code></pre></div>
+<h4 id="uguaglianza">Uguaglianza (==)</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="dv">5</span> <span class="sc">==</span> <span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Differenza</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="dv">5</span> <span class="sc">!=</span> <span class="dv">3</span></span></code></pre></div>
+<h4 id="differenza">Differenza (!=)</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="dv">5</span> <span class="sc">!=</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Maggiore di</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="dv">7</span> <span class="sc">&gt;</span> <span class="dv">5</span></span></code></pre></div>
+<h4 id="maggioreminore-di">Maggiore/Minore di</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="dv">7</span> <span class="sc">&gt;</span> <span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Minore di</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&lt;</span> <span class="dv">8</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&lt;</span> <span class="dv">8</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Maggiore o uguale a</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="dv">6</span> <span class="sc">&gt;=</span> <span class="dv">6</span></span></code></pre></div>
+<h4 id="maggiore-o-ugualeminore-o-uguale-a">Maggiore o uguale/Minore o
+uguale a</h4>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="dv">6</span> <span class="sc">&gt;=</span> <span class="dv">6</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Minore o uguale a</span></span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="dv">4</span> <span class="sc">&lt;=</span> <span class="dv">9</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <h3 id="operatori-logici">Operatori Logici</h3>
 <p>Gli operatori logici ci permettono di combinare più condizioni.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># AND</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">&amp;</span> <span class="cn">FALSE</span></span></code></pre></div>
+<h4 id="and">AND (&amp;)</h4>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">&amp;</span> <span class="cn">FALSE</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># OR</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span></span></code></pre></div>
+<h4 id="or">OR (|)</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># NOT</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="sc">!</span><span class="cn">TRUE</span></span></code></pre></div>
+<h4 id="not">NOT (!)</h4>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="sc">!</span><span class="cn">TRUE</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </div>
 <div id="strutture-di-dati" class="slide section level1">
 <h1>Strutture di dati</h1>
 <h3 id="strutture-di-dati-variabili">Strutture di Dati: Variabili</h3>
-<p>Variabili In R, possiamo memorizzare valori in
-<strong>variabili</strong>.</p>
+<p>In R, possiamo memorizzare valori in <strong>variabili</strong>.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Variabile numerica</span></span>
 <span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>risposta <span class="ot">&lt;-</span> <span class="dv">42</span></span>
 <span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>

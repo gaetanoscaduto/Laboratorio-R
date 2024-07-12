@@ -11,11 +11,15 @@ knitr::opts_chunk$set(warning = FALSE)
 
 ```
 
-# Data Visualization nelle Scienze Sociali
+# Data visualization nelle scienze sociali
 
 ```{r, echo=FALSE}
 
 vostra_cartella = "C:/Users/gasca/OneDrive - Università degli Studi di Milano-Bicocca/Dottorato/Didattica/Lab 2024/Laboratorio-R/Lezione 2"
+```
+
+```{r, eval=FALSE}
+vostra_cartella = "C:/Users/gaetanoscaduto//Desktop/Cartella esempio"
 ```
 
 ```{r}
@@ -25,13 +29,14 @@ data = import(paste0(vostra_cartella,"/ris2022_lezione.RDS"))
 data = data[complete.cases(data), ]
 ```
 
-## L'Importanza della Data Visualization
+## L'Importanza della data visualization
 
 La visualizzazione dei dati, è un aspetto cruciale dell'analisi dei dati nelle scienze sociali, che ci permette di trasformare dati complessi in rappresentazioni visive intuitive e accessibili, facilitando la comprensione, l'interpretazione e soprattutto la comunicazione dei fenomeni sociali.
 
 -   Una risorsa utile e accessibile (purtroppo solo in inglese) è rappresentata da [questo libro](https://clauswilke.com/dataviz/index.html).
+-   Altrimenti, c'è una miriade di video su Youtube
 
-#### Perché la Data Visualization è fondamentale?
+#### Perché la data visualization è importante
 
 1.  **Comunicazione Efficace**: La capacità di comunicare in modo chiaro ed efficace è essenziale nelle scienze sociali. Le visualizzazioni di dati ben progettate possono trasmettere informazioni complesse in modo semplice e immediato. Grafici, mappe e infografiche possono raccontare storie potenti, rivelando tendenze e pattern che potrebbero non essere evidenti dai dati grezzi.
 
@@ -55,7 +60,7 @@ La visualizzazione dei dati, è un aspetto cruciale dell'analisi dei dati nelle 
 
     ```
 
-    Ad esempio, in questo scatterplot di voto ai cinque stelle per superficie del comune possiamo vedere che, anche se non c'è una chiara legge che metta in relazione le due variabili, ci sono due puntini che spiccano per valori "anomali". Uno per una superficie enorme (e possiamo anche arrivare a capire quale sia) e l'altro per una percentuale anomala di voti ai 5 stelle...
+    Ad esempio, in questo scatterplot di voto ai 5 Stelle per superficie del comune possiamo vedere che, anche se non c'è una chiara legge che metta in relazione le due variabili, ci sono due puntini che spiccano per valori "anomali". Uno per una superficie enorme (e possiamo anche arrivare a capire quale sia) e l'altro per una percentuale anomala di voti ai 5 stelle...
 
     ```{r}
     outliers <- c("ROMA", "VOLTURARA APPULA")
@@ -94,11 +99,11 @@ install.packages("ggplot2")
 library(ggplot2)
 ```
 
-La funzione `ggplot()` crea un **oggetto ggplot**. Questo oggetto è il punto di partenza per costruire il grafico. Una scatola vuota a cui noi andremo aggiungendo dei layers. Gli argomenti principali di `ggplot()` sono il dataset e l'estetica (aes), che definiscono le variabili da mappare agli assi del grafico.
+La funzione `ggplot()` crea un **oggetto ggplot**. Questo oggetto è il punto di partenza per costruire il grafico. Una scatola vuota a cui noi andremo aggiungendo dei layers. Gli argomenti principali di `ggplot()` sono il dataset e l'estetica (aes), che definiscono le variabili da rappresentare sugli assi del grafico.
 
 # Tipi di visualizzazioni
 
-## Due variabili continue: Lo scatterplot
+## Due variabili continue: lo scatterplot
 
 Proviamo a costruire passo passo lo *scatterplot* dei voti al Movimento 5 Stelle per superficie. Lo scatterplot è un tipo di grafico che si utilizza quando si vuole mostrare la relazione fra due variabili continue (numeriche) e ci permette di iniziare ad esplorare agevolmente i meccanismi attraverso cui funziona ggplot2.
 
@@ -106,7 +111,8 @@ Proviamo a costruire passo passo lo *scatterplot* dei voti al Movimento 5 Stelle
 p <- ggplot(data, #il dataset da cui prendiamo le variabili 
             aes(x = M5S, #la variabile che vogliamo visualizzare sull'asse x
                 y = superficie #la variabile che vogliamo visualizzare sull'asse y (non è detto che ci sia sempre bisogno!)
-                ))
+                )
+            )
 ```
 
 In questo momento, p è un grafico vuoto
@@ -121,13 +127,19 @@ Possiamo continuare a costruire il grafico aggiungendo livelli (layers) all'ogge
 p1 <- p + geom_point()
 ```
 
-Vediamo adesso cosa "c'è dentro p"
+Vediamo adesso cosa "c'è dentro p1"
 
 ```{r}
 p1
 ```
 
-Questo scatterplot in particolare ha un problema: ci sono troppi puntini che si sovrappongono. Esistono vari modi per risolvere questo problema (con un buon prompt, potreste chiedere a ChatGPT di elencarveli tutti!) ma uno consiste nel settare manualmente la "trasparenza" dei puntini con l'opzione ***alpha.*** Il valore (frazionario) che data ad alfa indica il numero di puntini che devono sovrapporsi per avere l'equivalente di un puntino nero.
+Questo scatterplot in particolare ha un problema: ci sono troppi puntini che si sovrappongono.
+
+-   Esistono vari modi per risolvere questo problema (con un buon prompt, potreste chiedere a ChatGPT di elencarveli tutti!)
+
+-   Uno consiste nel settare manualmente la "trasparenza" dei puntini con l'opzione ***alpha.***
+
+    -   Il valore (frazionario) che data ad alfa indica il numero di puntini che devono sovrapporsi per avere l'equivalente di un puntino nero.
 
 ```{r}
 p1 <- p + geom_point(alpha=1/10)
@@ -135,7 +147,9 @@ p1 <- p + geom_point(alpha=1/10)
 p1
 ```
 
-Adesso il grafico è già più informativo. Ma noi possiamo personalizzare il grafico in tutti i modi che vogliamo. Ad esempio, possiamo fissare manualmente colore, forma, e dimensione dei pallini!
+Adesso il grafico è già più leggibile.
+
+Possiamo personalizzare il grafico in tutti i modi che vogliamo. Ad esempio, possiamo fissare manualmente colore, forma, e dimensione dei pallini!
 
 ```{r}
 p1 <- p + geom_point(alpha=1/3, #trasparenza
@@ -147,7 +161,15 @@ p1
                      
 ```
 
-Ogni modifica estetica fatta ad un grafico dovrebbe essere apportata al fine di massimizzare la sua efficacia comunicativa (che frase complessa!). Ciò significa, per esempio, che fra le altre cose i colori possono essere usati per scovare delle relazioni fra i dati. Ad esempio, invece di colorare tutti i punti in maniera omogenea, possiamo far variare il colore sulla base di una variabile. Nel nostro caso, proviamo a colorare sulla base della macroarea geografica. Notate che quando facciamo dipendere il colore da una variabile (quindi non è più costante per tutti i dati) questo va passato alla funzione ***aes()***, che possiamo mettere direttamente dentro geom_point!
+-   Ogni modifica estetica fatta ad un grafico dovrebbe essere apportata al fine di massimizzare la sua efficacia comunicativa (che frase complessa!).
+
+-   Ciò significa, per esempio, che fra le altre cose i colori possono essere usati per scovare delle relazioni fra i dati.
+
+-   Ad esempio, invece di colorare tutti i punti in maniera omogenea, possiamo far variare il colore sulla base di una variabile.
+
+-   Nel nostro caso, proviamo a colorare sulla base della macroarea geografica.
+
+    -   Notate che quando facciamo dipendere il colore da una variabile (quindi non è più costante per tutti i dati) questo va passato alla funzione ***aes()***, che possiamo mettere direttamente dentro geom_point!
 
 ```{r}
 p1 <- p + geom_point(aes(col=macroarea))
@@ -161,7 +183,9 @@ Notate anche che R ha automaticamente inserito delle comode leggende per poterci
 
 ## Assi: annotazione ed estensione
 
-Una cosa che salta all'occhio nel grafico precedente è che la relazione che abbiamo appena commentato è un po' mortificata dal fatto che l'asse x è molto affollato nell'area 0-20. Possiamo provare a risolvere leggermente il problema cambiando alpha, ma questo aiuta fino ad un certo punto.
+-   Una cosa che salta all'occhio nel grafico precedente è che la relazione che abbiamo appena commentato è un po' mortificata dal fatto che l'asse x è molto affollato nell'area 0-20.
+
+-   Possiamo provare a risolvere leggermente il problema cambiando alpha, ma questo aiuta fino ad un certo punto.
 
 ```{r}
 
@@ -172,7 +196,13 @@ p2
 
 ```
 
-Il problema è che abbiamo troppo spazio "vuoto" nel grafico, sia in alto che a destra. Potremmo dunque decidere di tagliarlo via, rimodulando i limiti dei nostri assi. Per farlo ci sono molti modi (chiedete a GPT!) ma uno dei più semplici è utilizzare le funzioni xlim() e ylim(). Come argomento di queste due funzioni metteremo i valori dove vogliamo che inizino e finiscano i nostri assi.
+-   Il problema è che abbiamo troppo spazio "vuoto" nel grafico, sia in alto che a destra.
+
+-   Potremmo dunque decidere di tagliarlo via, rimodulando i limiti dei nostri assi.
+
+-   Per farlo ci sono molti modi (chiedete a GPT!) ma uno dei più semplici è utilizzare le funzioni xlim() e ylim().
+
+    -   Come argomento di queste due funzioni metteremo i valori dove vogliamo che inizino e finiscano i nostri assi.
 
 Sempre nello spirito di ggplot, aggiungiamo questi argomenti come *layers.*
 
@@ -185,7 +215,9 @@ p3
   
 ```
 
-Un'altra cosa che possiamo fare è cambiare i nomi degli assi per renderli più informativi e più facili da leggere per il nostro pubblico. In questo caso, utilizziamo le funzioni ***xlab()*** e ***ylab().***
+Un'altra cosa che possiamo fare è cambiare i nomi degli assi per renderli più informativi e più facili da leggere per il nostro pubblico.
+
+In questo caso, utilizziamo le funzioni ***xlab()*** e ***ylab().***
 
 ```{r}
 p4=p3+
@@ -197,10 +229,9 @@ p4
 
 ## Un modo facile per visualizzare una regressione con una sola variabile dipendente
 
-A questo punto, dopo tutto questo giocare con gli scatterplot, ci potrebbe essere venuto il dubio che esista una relazione fra la superficie del comune ed il voto al movimento 5 stelle. Un modo molto semplice ed intuitivo per verificarlo consiste nel trovare la retta di regressione nella relazione superficie \~ m5s. Con ggplot, lo si può fare in un modo semplice e veloce
+A questo punto, dopo tutto questo giocare con gli scatterplot, ci potrebbe essere venuto il dubio che esista una relazione fra la superficie del comune ed il voto al Movimento 5 Stelle. Un modo molto semplice ed intuitivo per verificarlo consiste nel trovare la retta di regressione nella relazione superficie \~ M5S. Con ggplot, lo si può fare in un modo semplice e veloce.
 
 ```{r}
-
 p5=p4 +
   geom_smooth(method = "lm")
 
@@ -234,17 +265,21 @@ definitivo = ggplot(data, aes(x=M5S, y=superficie))+
 definitivo
 ```
 
-Cosa significa tutto questo? Commentiamo
+Cosa significa tutto questo? Commentiamo.
 
 ## Distribuzioni univariate: Il grafico a barre e l'istogramma
 
-Non sempre mostrare la relazione fra due o più variabili è di interesse. A volte, può essere più interessante anche solo mostrare come si distribuisce una variabile. A seconda che questa variabile sia *numerica* o *categoriale* abbiamo diversi possibili visualizzazioni che possiamo utilizzare: l'istogramma ed il grafico a barre (*barplot*).
+-   Non sempre mostrare la relazione fra due o più variabili è di interesse.
 
-Anche se possono sembrare simili, essi servono a scopi differenti e rappresentano dati diversi. Vediamo le principali differenze:
+-   A volte, può essere più interessante anche solo mostrare come si distribuisce una variabile.
 
-#### Istogramma
+-   A seconda che questa variabile sia *numerica* o *categoriale* abbiamo diversi possibili visualizzazioni che possiamo utilizzare: l'istogramma ed il grafico a barre (*barplot*).
 
-Un istogramma è utilizzato per rappresentare la **distribuzione di una singola variabile continua**. Esso divide i dati in intervalli (o "bin") e mostra il numero di osservazioni che cadono in ciascun intervallo.
+Anche se possono sembrare simili, essi servono a scopi differenti e rappresentano dati diversi. Vediamo le principali differenze.
+
+#### Distribuzioni univariate di variabili numeriche: Istogramma
+
+Un istogramma è utilizzato per rappresentare la **distribuzione di una singola variabile continua (numerica)**. Esso divide i dati in intervalli (o "bin") e mostra il numero di osservazioni che cadono in ciascun intervallo.
 
 -   **Dati**: Variabile continua (ad esempio, altezza, peso, tempo).
 
@@ -315,7 +350,7 @@ Cosa ci dice questo istogramma?
 
 #### Barplot (Diagramma a Barre)
 
-Un barplot è utilizzato per rappresentare dati categoriali o la frequenza di categorie discrete. Esso mostra la quantità o la frequenza di ciascuna categoria utilizzando barre rettangolari.
+Un barplot è utilizzato per rappresentare dati categoriali o la frequenza di categorie discrete. Esso mostra la quantità o la frequenza di ciascuna categoria attraverso l'altezza delle barre rettangolari.
 
 -   **Dati**: Variabile categoriale o discreta (ad esempio, tipo di frutta, genere musicale).
 
@@ -325,7 +360,7 @@ Un barplot è utilizzato per rappresentare dati categoriali o la frequenza di ca
 
 -   **Scopo**: Confrontare la frequenza o il valore tra diverse categorie.
 
-Un'esempio di variabile categoriale nel nostro dataset è la variabile "most_voted", che indica, per ogni comune, qual è stato il partito più votato. Possiamo visualizzare come si distribuisce questa variabile con un barplot, che in ggplot2 si costruisce con il comando geom_bar().
+Un'esempio di variabile categoriale nel nostro dataset è la variabile "most_voted", che indica, per ogni comune, qual è stato il partito più votato (ha sette categorie corrispondenti ai 7 principali partiti). Possiamo visualizzare come si distribuisce questa variabile con un barplot, che in ggplot2 si costruisce con il comando geom_bar().
 
 ```{r}
 barplot = ggplot(data, aes(x=most_voted))+
@@ -340,12 +375,14 @@ Già da questo grafico possiamo vedere moolte cose interessanti. Delle cose che 
 
 -   Colorare ogni barra col colore tipico del partito.
 
-Queste due operazioni sono fattibili anche se un po' noiose, e la spiegazione ci prenderebbe troppo tempo. Ovviamente, per chi lo volesse fare da sè, è apprezzato (classica cosa per cui ChatGPT è fondamentale!)
+Queste due operazioni sono fattibili ma un po' noiose, e la spiegazione ci prenderebbe troppo tempo.
+
+Ovviamente, per chi lo volesse fare da sè, è apprezzato (classica cosa per cui ChatGPT è la soluzione migliore!)
 
 #### Riepilogo delle Differenze
 
 | Caratteristica | Istogramma                                          | Barplot                                            |
-|------------------|----------------------------|---------------------------|
+|------------------|---------------------------|---------------------------|
 | Tipo di Dati   | Continua                                            | Categoriale o discreta                             |
 | Asse X         | Intervalli della variabile continua                 | Categorie                                          |
 | Asse Y         | Frequenza delle osservazioni                        | Frequenza o valore associato alle categorie        |
@@ -353,9 +390,21 @@ Queste due operazioni sono fattibili anche se un po' noiose, e la spiegazione ci
 
 # Una variabile categorica e una continua: distribuzioni per gruppi
 
-Supponiamo di voler mostrare come mettere in evidenza la relazione fra una variabile categoriale e una continua. In questo caso, quello che ci basta fare è utilizzare quello che abbiamo imparato per le variabili continue quando sono da sole, e ripeterlo per ogni categoria (abbiamo anche altre opzioni, sì, ma non complichiamo le cose).
+-   Supponiamo di voler mostrare come mettere in evidenza la relazione fra una variabile categoriale e una
 
-Ad esempio, supponiamo di voler vedere come si distribuisce il voto ad Azione-Italia Viva sulla base della variabile "areeint" che riporta il codice delle aree interne istat, dove A indica zone molto centrali (le grandi città, i capoluoghi di regione) ed E indica i comuni isolati e più lontani dai centri. Questa variabile ci parla dunque di perifericità. Per vedere questa relazione, quello che possiamo fare è fare un istogramma della distribuzione dei voti di Az-IV in ciascuna di queste aree. Per farlo, si usa la funcione ***facet_wrap()*** con all'interno il nome della variabile preceduto da una tilde \~***.*** Vediamola in Azione.
+-   continua. In questo caso, quello che ci basta fare è utilizzare quello che abbiamo imparato per le variabili continue quando sono da sole, e ripeterlo per ogni categoria
+
+    -   Abbiamo anche altre opzioni, sì, ma non complichiamo le cose.
+
+-   Ad esempio, supponiamo di voler vedere come si distribuisce il voto ad Azione-Italia Viva sulla base della variabile "areeint"
+
+    -   ***areeint*** riporta il codice delle aree interne istat, dove A indica zone molto centrali (le grandi città, i capoluoghi di regione) ed E indica i comuni isolati e più lontani dai centri.
+
+    -   Questa variabile ci parla dunque di perifericità.
+
+-   Per vedere questa relazione, quello che possiamo fare è fare un istogramma della distribuzione dei voti di Az-IV in ciascuna di queste aree.
+
+-   Per farlo, si usa la funcione ***facet_wrap()*** con all'interno il nome della variabile preceduto da una tilde (\~)
 
 ```{r}
 istogramma_per_area = ggplot(data, aes(x=Aziv))+
@@ -370,9 +419,13 @@ Come è possibile notare, nei comuni in fascia A e B Azione-Italia Viva ha una d
 
 # Due variabili, entrambe categoriali
 
-L'ultimo caso che abbiamo è quando entrambe le variabili che ci interessano sono categoriali. In questo caso, una visualizzazione efficace è data dal *countplot* o *diagramma di conto*. Attraverso questo diagramma, siamo in grado di osservare come distribuisce la frequenza fra due variabili categoriali.
+-   L'ultimo caso che abbiamo è quando entrambe le variabili che ci interessano **due** e sono **entrambe** **categoriali**.
 
-Un esempio potrebbe essere quello di utilizzare le variabili most_voted e areeinterne per vedere che relazione c'è fra queste due variabili. Per farlo, si usa la funzione ***geom_count()***
+-   In questo caso, una visualizzazione efficace è data dal *countplot* o *diagramma di conto*.
+
+-   Attraverso questo diagramma, siamo in grado di osservare come distribuisce la frequenza fra due variabili categoriali.
+
+-   Un esempio potrebbe essere quello di utilizzare le variabili most_voted e areeinterne per vedere che relazione c'è fra queste due variabili. Per farlo, si usa la funzione ***geom_count()***
 
 ```{r}
 
@@ -387,7 +440,7 @@ Esistono anche soluzioni più belle e carine di questa (come il tileplot). Se av
 # Ricapitolando
 
 | Tipo di Grafico          | Quando Usarlo                                                            | Pro                                                                                                                                                                               | Contro                                                                                                           |
-|-----------------|-----------------|-----------------------|-----------------|
+|-----------------|-----------------|---------------------|-----------------|
 | Istogramma               | Per visualizzare la distribuzione di una variabile continua              | Facile da interpretare, mostra la distribuzione                                                                                                                                   | La scelta dei bin può influenzare l'interpretazione e la leggibilità                                             |
 | Barplot                  | Per confrontare la frequenza o il valore tra categorie discrete          | Facile da interpretare, ideale per confronti tra categorie                                                                                                                        | Diventa complesso da ordinare ed eitchettare usando ggplot2                                                      |
 | Scatterplot              | Per esaminare la relazione tra due variabili continue                    | Mostra chiaramente la relazione tra due variabili, facilita l'identificazione di correlazioni e outliers. È anche possibile fittare una bella e convincente retta di regressione. | Può diventare affollato con molti punti, bisogna giocare bene con forme, colori e traparenza                     |

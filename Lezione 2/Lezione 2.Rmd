@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(warning = FALSE)
 ```
 
-# Lavoriamo con un vero Dataset
+# Lavoriamo con un vero dataset
 
 -   R si basa su una filosofia open source.
 
@@ -26,9 +26,11 @@ Prima di utilizzare un pacchetto per la prima volta, **solo per la prima volta**
 
     -   Noi in questa e nella prossima lezione useremo tre pacchetti
 
-        -   **rio**,
+        -   **rio**
 
-        -   **ggplot2 e texreg**
+        -   **ggplot2**
+
+        -   **texreg**
 
 Per installare i pacchetti, si usa la seguente sintassi.
 
@@ -36,7 +38,8 @@ Per installare i pacchetti, si usa la seguente sintassi.
 install.packages("rio")
 install.packages("ggplot2")
 install.packages("texreg") #Nota: questo, dopo il cancelletto, è un commento.
-#I commenti sono porzioni di testo che il computer non guarda, servono a noi umani per arricchire il codice con spiegazioni e appunti
+#I commenti sono porzioni di testo che il computer non guarda, servono a noi umani per arricchire il codice 
+#con spiegazioni e appunti
 ```
 
 Dopo aver installato, dovete chiamare la libreria.
@@ -64,7 +67,7 @@ La libreria rio (che sta per R Input/Output) vi permette di importare file su R 
 
 Nel nostro caso io vi ho preparato un dataset coi **risultati delle elezioni del 2022 su tutti i comuni italiani** più qualche altra info.
 
--   Questo dataset è basato sugli open data del ministero degli interni che sono stati da me manipolati un po' e uniti con un tot di statistiche dell'ISTAT.
+-   Questo dataset è basato sugli [open data del ministero degli interni](https://elezionistorico.interno.gov.it/) che sono stati da me manipolati un po' e uniti con un tot di statistiche dell'ISTAT.
 
 Per importarlo in R dovete fare le seguenti cose:
 
@@ -76,11 +79,13 @@ Per importarlo in R dovete fare le seguenti cose:
 
 -   Dopodiché dovrete dire ad R che state lavorando in quella cartella.
 
-    -   Per farlo, dovrete eseguire il comando "setwd()" (che sta per "set working directory") e mettere, tra virgolette, il **percorso della cartella**.
+    -   Per farlo, dovrete eseguire il comando ***setwd()*** (che sta per "set working directory") e mettere, tra virgolette, il **percorso della cartella**.
 
         -   Per trovare il percorso della cartella, se avete windows basta fare tasto destro sulla cartella e poi "copia come percorso"
 
         -   Se avete Mac cercate su google "come copiare percorso cartella Mac", ma secondo me potete vedere da "proprietà" col tasto destro o qualcosa del genere.
+
+        -   Una volta che avete settato la working directory, tutti i file che salverete da R li troverete lì!
 
             -   Se proprio non riuscite: **uscite da R e** **cliccate sul file del dataset due volte**. Se intendete imparare come si usa R questa cosa non va bene, ma per sta volta passi...
 
@@ -101,7 +106,7 @@ Quindi il comando sarà:
 setwd("C:/Users/gaetanoscaduto/OneDrive - Università degli Studi di Milano-Bicocca/Desktop/cartella esempio")
 ```
 
-```{r, eval=FALSE}
+```{r, echo=FALSE}
 setwd("C:/Users/gasca/OneDrive - Università degli Studi di Milano-Bicocca/Dottorato/Didattica/Lab 2024/Laboratorio-R/Lezione 2")
 ```
 
@@ -121,7 +126,7 @@ In questo caso state dicendo ad R:
 
 -   Notate che dovrete sempre riportare il nome del file che volete importare **compreso di estensione (.RDS).**
 
--   Con la funzione import() (che fa parte di rio) potete importare senza problemi sostanzialmente qualunque tipo di data file esistente.
+-   Con la funzione ***import()*** (che fa parte di rio) potete importare senza problemi sostanzialmente qualunque tipo di data file esistente.
 
     -   Anche un foglio excel, ad esempio.
 
@@ -133,7 +138,7 @@ data = data[complete.cases(data), ]
 
 # Sbirciamo nei dati
 
-Adesso vogliamo sbirciare nei dati. Possiamo farlo col comando head()
+Adesso vogliamo sbirciare nei dati. Possiamo farlo col comando ***head().***
 
 ```{r, warning = F}
 head(data)
@@ -141,7 +146,7 @@ head(data)
 
 Se volessimo vedere ancora meglio nei dati, su R fate partire il comando ***View(data)*** e potete navigare in libertà nel dataset.
 
-Se vogliamo velocemente un sommario di quello che contine il dataset, possiamo eseguire il seguente comando
+Se vogliamo velocemente un sommario di quello che contiene il dataset, possiamo eseguire il seguente comando
 
 ```{r, warning = F}
 summary(data)
@@ -176,6 +181,12 @@ Oppure ci chiediamo: "ma nel comune dove il Movimento 5 Stelle ha preso la perce
 -   La risposta è data dal comando ***max()*** sulla variabile (colonna) che esprime la percentuale di voto ai 5 Stelle.
 
 ```{r, warning = F}
+max(data$M5S)
+```
+
+E se invece volessimo il minimo? Usiamo il comando ***min()***
+
+```{r}
 max(data$M5S)
 ```
 
@@ -258,7 +269,7 @@ round(prop.table(table(data$macroarea, data$areeint), 2), digits = 2)
 
 -   Sappiamo tutti cos'è la regressione?
 
-    -   Per chi ha bisogno di un ripasso, ho fatto una veloce guida per un altro corso qualche anno fa. Potete scaricarla [qui](https://github.com/gaetanoscaduto/teaching/blob/main/Regressione%20PP/Dispensa.pdf)
+    -   Per chi ha bisogno di un ripasso, ho fatto una veloce guida per un altro corso qualche anno fa. Potete scaricarla [qui](https://github.com/gaetanoscaduto/teaching/blob/main/Regressione%20PP/Dispensa.pdf).
 
 -   Qui faremo solo regressioni lineari.
 
@@ -266,7 +277,9 @@ round(prop.table(table(data$macroarea, data$areeint), 2), digits = 2)
 
 -   Le regressioni lineari si fanno col comando "lm".
 
-    -    Il primo argomento di "lm" è "data=nome_mio_dataset" (nel nostro caso sfortunato il nostro dataset si chiama proprio data).
+    -   Il primo *argomento* di "lm" è ***data=*** seguito dal nome del vostro dataset (che nel nostro caso si chiama anche lui ***data***).
+
+    -   Va poi messa una virgola per separare il primo ed il secondo *argomento.*
 
     -   Poi mettete la variabile dipendente, la vostra y
 
@@ -278,7 +291,7 @@ round(prop.table(table(data$macroarea, data$areeint), 2), digits = 2)
 
     -   Osservate i risultati della vostra regressione mettendo l'oggetto in una funzione ***screenreg()***.
 
-        -   NOTA: ***screenreg()*** funziona solo se avete chiamato la libreria texreg prima con il comando ***library()*** prima!
+        -   NOTA: ***screenreg()*** funziona solo se avete chiamato la libreria *texreg* prima con il comando ***library()*** prima!
 
     -   Partiamo da un modello celeberrimo: "i cinque stelle partito del sud"
 
@@ -303,7 +316,7 @@ regr3 = lm(data=data, M5S ~ macroarea + areeint + num_residenti + superficie)
 screenreg(regr3)
 ```
 
-Qui termina la nostra lezione. Di nuovo: non vi spaventate. R è difficile. Adesso sapete che esiste. Se volete impararlo bene, il mio consiglio è di essere pazienti e non arrabbiarvi. Dopo un po' ce la si fa e ne vale la pena.
+Qui termina la nostra lezione. Di nuovo: non vi spaventate. R è difficile. Il mio consiglio è di essere pazienti, non arrabbiarvi e sfruttare al massimo l'aiuto delle intelligenze artificiali per comprendere gli errori ed i funzionamenti. Dopo un po' ce la si fa e ne vale la pena.
 
 Per qualunque cosa non esitate a scrivermi a gaetano.scaduto\@unimib.it
 

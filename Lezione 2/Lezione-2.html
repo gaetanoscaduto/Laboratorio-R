@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Gaetano Scaduto" />
-  <meta name="date" content="2024-07-11" />
+  <meta name="date" content="2024-07-12" />
   <title>Lezione 2</title>
   <style type="text/css">
 code{white-space: pre-wrap;}
@@ -526,10 +526,10 @@ list-style-type: none;
   <p class="author">
 Gaetano Scaduto
   </p>
-  <p class="date">2024-07-11</p>
+  <p class="date">2024-07-12</p>
 </div>
-<div id="lavoriamo-un-vero-dataset" class="slide section level1">
-<h1>Lavoriamo un vero Dataset</h1>
+<div id="lavoriamo-con-un-vero-dataset" class="slide section level1">
+<h1>Lavoriamo con un vero dataset</h1>
 <ul>
 <li><p>R si basa su una filosofia open source.</p>
 <ul>
@@ -550,8 +550,9 @@ internet</strong> ed eseguire il comando
 <ul>
 <li><p>Noi in questa e nella prossima lezione useremo tre pacchetti</p>
 <ul>
-<li><p><strong>rio</strong>,</p></li>
-<li><p><strong>ggplot2 e texreg</strong></p></li>
+<li><p><strong>rio</strong></p></li>
+<li><p><strong>ggplot2</strong></p></li>
+<li><p><strong>texreg</strong></p></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -559,7 +560,8 @@ internet</strong> ed eseguire il comando
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rio&quot;</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;texreg&quot;</span>) <span class="co">#Nota: questo, dopo il cancelletto, è un commento.</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#I commenti sono porzioni di testo che il computer non guarda, servono a noi umani per arricchire il codice con spiegazioni e appunti</span></span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#I commenti sono porzioni di testo che il computer non guarda, servono a noi umani per arricchire il codice </span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#con spiegazioni e appunti</span></span></code></pre></div>
 <p>Dopo aver installato, dovete chiamare la libreria.</p>
 <ul>
 <li>Questo va fatto <strong>ogni volta che riavviate R</strong> con il
@@ -587,9 +589,9 @@ file su R senza sbatti.</p>
 delle elezioni del 2022 su tutti i comuni italiani</strong> più qualche
 altra info.</p>
 <ul>
-<li>Questo dataset è basato sugli open data del ministero degli interni
-che sono stati da me manipolati un po’ e uniti con un tot di statistiche
-dell’ISTAT.</li>
+<li>Questo dataset è basato sugli <a href="https://elezionistorico.interno.gov.it/">open data del ministero
+degli interni</a> che sono stati da me manipolati un po’ e uniti con un
+tot di statistiche dell’ISTAT.</li>
 </ul>
 <p>Per importarlo in R dovete fare le seguenti cose:</p>
 <ul>
@@ -604,15 +606,18 @@ cartella.</li>
 <li><p>Dopodiché dovrete dire ad R che state lavorando in quella
 cartella.</p>
 <ul>
-<li><p>Per farlo, dovrete eseguire il comando “setwd()” (che sta per
-“set working directory”) e mettere, tra virgolette, il <strong>percorso
-della cartella</strong>.</p>
+<li><p>Per farlo, dovrete eseguire il comando
+<strong><em>setwd()</em></strong> (che sta per “set working directory”)
+e mettere, tra virgolette, il <strong>percorso della
+cartella</strong>.</p>
 <ul>
 <li><p>Per trovare il percorso della cartella, se avete windows basta
 fare tasto destro sulla cartella e poi “copia come percorso”</p></li>
 <li><p>Se avete Mac cercate su google “come copiare percorso cartella
 Mac”, ma secondo me potete vedere da “proprietà” col tasto destro o
-qualcosa del genere.</p>
+qualcosa del genere.</p></li>
+<li><p>Una volta che avete settato la working directory, tutti i file
+che salverete da R li troverete lì!</p>
 <ul>
 <li>Se proprio non riuscite: <strong>uscite da R e</strong>
 <strong>cliccate sul file del dataset due volte</strong>. Se intendete
@@ -633,10 +638,9 @@ Milano-Bicocca\Desktop\cartella esempio”</p></li>
 </ul>
 <p>Quindi il comando sarà:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/gaetanoscaduto/OneDrive - Università degli Studi di Milano-Bicocca/Desktop/cartella esempio&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/gasca/OneDrive - Università degli Studi di Milano-Bicocca/Dottorato/Didattica/Lab 2024/Laboratorio-R/Lezione 2&quot;</span>)</span></code></pre></div>
 <p>Una volta fatto ciò, eseguite il seguente comando (non dimenticate le
 virgolette ““!) per importare il dataframe nel vostro ambiente.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">import</span>(<span class="st">&quot;ris2022_lezione.RDS&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">import</span>(<span class="st">&quot;ris2022_lezione.RDS&quot;</span>)</span></code></pre></div>
 <ul>
 <li>NOTA: se avete fatto doppioclic sul dataset dalla cartella (per
 quelli che non trovavano come copiare il percorso della cartella), il
@@ -652,9 +656,9 @@ ora in poi “data”.</p>
 </ul></li>
 <li><p>Notate che dovrete sempre riportare il nome del file che volete
 importare <strong>compreso di estensione (.RDS).</strong></p></li>
-<li><p>Con la funzione import() (che fa parte di rio) potete importare
-senza problemi sostanzialmente qualunque tipo di data file
-esistente.</p>
+<li><p>Con la funzione <strong><em>import()</em></strong> (che fa parte
+di rio) potete importare senza problemi sostanzialmente qualunque tipo
+di data file esistente.</p>
 <ul>
 <li>Anche un foglio excel, ad esempio.</li>
 </ul></li>
@@ -662,13 +666,13 @@ esistente.</p>
 <p>Nota: questo dataset ha qualche dato mancante. Per semplicità noi
 lavoreremo coi dati completi. Rimuovo quindi tutte le righe che hanno
 “missing data” con questo comando.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>data <span class="ot">=</span> data[<span class="fu">complete.cases</span>(data), ]</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>data <span class="ot">=</span> data[<span class="fu">complete.cases</span>(data), ]</span></code></pre></div>
 </div>
 <div id="sbirciamo-nei-dati" class="slide section level1">
 <h1>Sbirciamo nei dati</h1>
 <p>Adesso vogliamo sbirciare nei dati. Possiamo farlo col comando
-head()</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<strong><em>head().</em></strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   istat          comune  regione provincia num_residenti superficie  Lega    Fi
 ## 1  1001          AGLIE&#39; Piemonte        TO          2545      13.28 12.15  9.57
 ## 2  1002         AIRASCA Piemonte        TO          3633      15.70 10.31  7.77
@@ -686,9 +690,9 @@ head()</p>
 <p>Se volessimo vedere ancora meglio nei dati, su R fate partire il
 comando <strong><em>View(data)</em></strong> e potete navigare in
 libertà nel dataset.</p>
-<p>Se vogliamo velocemente un sommario di quello che contine il dataset,
-possiamo eseguire il seguente comando</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
+<p>Se vogliamo velocemente un sommario di quello che contiene il
+dataset, possiamo eseguire il seguente comando</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
 <pre><code>##      istat           comune            regione           provincia        
 ##  Min.   :  1001   Length:7700        Length:7700        Length:7700       
 ##  1st Qu.: 16171   Class :character   Class :character   Class :character  
@@ -744,11 +748,11 @@ dataset</p>
 <em><strong>mean()</strong>.</em></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>num_residenti)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>num_residenti)</span></code></pre></div>
 <pre><code>## [1] 7598.046</code></pre>
 <p>Oppure la mediana, con il comando
 <strong><em>median()</em></strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">median</span>(data<span class="sc">$</span>num_residenti)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">median</span>(data<span class="sc">$</span>num_residenti)</span></code></pre></div>
 <pre><code>## [1] 2438.5</code></pre>
 <p>Oppure ci chiediamo: “ma nel comune dove il Movimento 5 Stelle ha
 preso la percentuale più alta, ma quanto ha preso?”.</p>
@@ -756,7 +760,11 @@ preso la percentuale più alta, ma quanto ha preso?”.</p>
 <li>La risposta è data dal comando <strong><em>max()</em></strong> sulla
 variabile (colonna) che esprime la percentuale di voto ai 5 Stelle.</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">max</span>(data<span class="sc">$</span>M5S)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">max</span>(data<span class="sc">$</span>M5S)</span></code></pre></div>
+<pre><code>## [1] 85.12</code></pre>
+<p>E se invece volessimo il minimo? Usiamo il comando
+<strong><em>min()</em></strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">max</span>(data<span class="sc">$</span>M5S)</span></code></pre></div>
 <pre><code>## [1] 85.12</code></pre>
 <ul>
 <li><p>Se invece ci chiedessimo quanto è piccolo il più piccolo comune
@@ -765,14 +773,14 @@ che abbiamo nel dataset</p>
 <li>Utilizziamo la variabile <em>superficie</em>.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">min</span>(data<span class="sc">$</span>superficie)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">min</span>(data<span class="sc">$</span>superficie)</span></code></pre></div>
 <pre><code>## [1] 0.2</code></pre>
 <p>Adesso ci chiediamo se, per esempio, la media del numero di voti
 presi da Forza Italia nei comuni della Calabria è diversa da quella dei
 comuni in Umbria.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">mean</span>(data[data<span class="sc">$</span>regione <span class="sc">==</span> <span class="st">&quot;Calabria&quot;</span>, ]<span class="sc">$</span>Fi)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">mean</span>(data[data<span class="sc">$</span>regione <span class="sc">==</span> <span class="st">&quot;Calabria&quot;</span>, ]<span class="sc">$</span>Fi)</span></code></pre></div>
 <pre><code>## [1] 18.14832</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">mean</span>(data[data<span class="sc">$</span>regione <span class="sc">==</span> <span class="st">&quot;Umbria&quot;</span>, ]<span class="sc">$</span>Fi)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">mean</span>(data[data<span class="sc">$</span>regione <span class="sc">==</span> <span class="st">&quot;Umbria&quot;</span>, ]<span class="sc">$</span>Fi)</span></code></pre></div>
 <pre><code>## [1] 7.315217</code></pre>
 </div>
 <div id="le-tabelle" class="slide section level1">
@@ -789,7 +797,7 @@ ed in entrambi i casi si usa il comando “table”.</p></li>
 un comune centrale, F è un comune sperduto).</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>areeint)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>areeint)</span></code></pre></div>
 <pre><code>## 
 ##    A    B    C    D    E    F 
 ##  180   59 3770 1863 1474  354</code></pre>
@@ -798,7 +806,7 @@ un comune centrale, F è un comune sperduto).</li>
 metterle nel comando <strong><em>table()</em></strong> separate da una
 virgola.</li>
 </ul>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint)</span></code></pre></div>
 <pre><code>##             
 ##                 A    B    C    D    E    F
 ##   Center       38    6  394  319  190   21
@@ -807,7 +815,7 @@ virgola.</li>
 ##   South        50   16  765  731  755  229</code></pre>
 <p>Questa tabella non è molto informativa, possiamo pensare a fare una
 tabella con le proporzioni con il seguente comando.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint))</span></code></pre></div>
 <pre><code>##             
 ##                         A            B            C            D            E
 ##   Center     0.0049350649 0.0007792208 0.0511688312 0.0414285714 0.0246753247
@@ -828,7 +836,7 @@ arrotondare i decimali a quante cifre vogliamo</p>
 <li>Noi vogliamo due cifre soltanto.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint)), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint)), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##             
 ##                 A    B    C    D    E    F
 ##   Center     0.00 0.00 0.05 0.04 0.02 0.00
@@ -846,14 +854,14 @@ arrotondare i decimali a quante cifre vogliamo</p>
 </ul></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint), <span class="dv">1</span>), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint), <span class="dv">1</span>), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##             
 ##                 A    B    C    D    E    F
 ##   Center     0.04 0.01 0.41 0.33 0.20 0.02
 ##   North-East 0.04 0.01 0.58 0.19 0.16 0.03
 ##   North-West 0.02 0.01 0.64 0.20 0.11 0.02
 ##   South      0.02 0.01 0.30 0.29 0.30 0.09</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint), <span class="dv">2</span>), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint), <span class="dv">2</span>), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##             
 ##                 A    B    C    D    E    F
 ##   Center     0.21 0.10 0.10 0.17 0.13 0.06
@@ -868,15 +876,19 @@ arrotondare i decimali a quante cifre vogliamo</p>
 <li><p>Sappiamo tutti cos’è la regressione?</p>
 <ul>
 <li>Per chi ha bisogno di un ripasso, ho fatto una veloce guida per un
-altro corso qualche anno fa. Potete scaricarla <a href="https://github.com/gaetanoscaduto/teaching/blob/main/Regressione%20PP/Dispensa.pdf">qui</a></li>
+altro corso qualche anno fa. Potete scaricarla <a href="https://github.com/gaetanoscaduto/teaching/blob/main/Regressione%20PP/Dispensa.pdf">qui</a>.</li>
 </ul></li>
 <li><p>Qui faremo solo regressioni lineari.</p></li>
 <li><p>Supponiamo di voler provare a costruire un modello che spiega il
 voto al Movimento 5 stelle.</p></li>
 <li><p>Le regressioni lineari si fanno col comando “lm”.</p>
 <ul>
-<li><p>Il primo argomento di “lm” è “data=nome_mio_dataset” (nel nostro
-caso sfortunato il nostro dataset si chiama proprio data).</p></li>
+<li><p>Il primo <em>argomento</em> di “lm” è
+<strong><em>data=</em></strong> seguito dal nome del vostro dataset (che
+nel nostro caso si chiama anche lui
+<strong><em>data</em></strong>).</p></li>
+<li><p>Va poi messa una virgola per separare il primo ed il secondo
+<em>argomento.</em></p></li>
 <li><p>Poi mettete la variabile dipendente, la vostra y</p></li>
 <li><p>Dopodiché, mettete una tilde ~ (Alt+126)</p></li>
 <li><p>Infine, le variabili indipendenti.</p></li>
@@ -885,15 +897,15 @@ caso sfortunato il nostro dataset si chiama proprio data).</p></li>
 in una funzione <strong><em>screenreg()</em></strong>.</p>
 <ul>
 <li>NOTA: <strong><em>screenreg()</em></strong> funziona solo se avete
-chiamato la libreria texreg prima con il comando
+chiamato la libreria <em>texreg</em> prima con il comando
 <strong><em>library()</em></strong> prima!</li>
 </ul></li>
 <li><p>Partiamo da un modello celeberrimo: “i cinque stelle partito del
 sud”</p></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>regr1 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea)</span>
-<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="fu">screenreg</span>(regr1)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>regr1 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea)</span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="fu">screenreg</span>(regr1)</span></code></pre></div>
 <pre><code>## 
 ## ================================
 ##                      Model 1    
@@ -915,8 +927,8 @@ sud”</p></li>
 <p>Domandina: qual è la categoria di riferimento?</p>
 <p>Adesso proviamo un modello più sofisticato, che tiene anche in conto
 la perifericità</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>regr2 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea <span class="sc">+</span> areeint)</span>
-<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="fu">screenreg</span>(regr2)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>regr2 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea <span class="sc">+</span> areeint)</span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="fu">screenreg</span>(regr2)</span></code></pre></div>
 <pre><code>## 
 ## ================================
 ##                      Model 1    
@@ -948,8 +960,8 @@ la perifericità</p>
 <p>Infine, proviamo anche a metterci dentro il numero di residenti, che
 è una variabile continua, e la superficie del comune, che è anch’essa
 una variabile continua.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a>regr3 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea <span class="sc">+</span> areeint <span class="sc">+</span> num_residenti <span class="sc">+</span> superficie)</span>
-<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="fu">screenreg</span>(regr3)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a>regr3 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea <span class="sc">+</span> areeint <span class="sc">+</span> num_residenti <span class="sc">+</span> superficie)</span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="fu">screenreg</span>(regr3)</span></code></pre></div>
 <pre><code>## 
 ## ================================
 ##                      Model 1    
@@ -983,9 +995,10 @@ una variabile continua.</p>
 ## ================================
 ## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
 <p>Qui termina la nostra lezione. Di nuovo: non vi spaventate. R è
-difficile. Adesso sapete che esiste. Se volete impararlo bene, il mio
-consiglio è di essere pazienti e non arrabbiarvi. Dopo un po’ ce la si
-fa e ne vale la pena.</p>
+difficile. Il mio consiglio è di essere pazienti, non arrabbiarvi e
+sfruttare al massimo l’aiuto delle intelligenze artificiali per
+comprendere gli errori ed i funzionamenti. Dopo un po’ ce la si fa e ne
+vale la pena.</p>
 <p>Per qualunque cosa non esitate a scrivermi a
 gaetano.scaduto@unimib.it</p>
 <p>Ciao!</p>

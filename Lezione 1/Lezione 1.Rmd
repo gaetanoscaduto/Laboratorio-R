@@ -15,21 +15,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 La prima domanda che potreste farvi è: perché dovrei voler imparare R?
 
-Qui una serie di ragioni per cui secondo me può valer la pena.
+-   È molto **richiesto** ed **apprezzato** nel mercato del lavoro.
 
--   È molto richiesto ed apprezzato nel mercato del lavoro.
+-   Imparare R vi **libera** dalla necessità di imparare qualunque altro software statistico.
 
--   Imparare R vi libera sostanzialmente dalla necessità di imparare qualunque altro software statistico
+-   Al contrario di tutti gli altri, è **gratis.**
 
--   Al contrario di tutti gli altri, è **gratis**
+-   Vi potrà **facilitare** in tutta una serie di compiti che ancora non sapete nemmeno di dover affrontare nella vostra vita professionale.
 
--   Vi potrà facilitare in tutta una serie di compiti che ancora non sapete nemmeno di dover affrontare nella vostra vita professionale.
-
-Quali sono i contro di usare R?
+Quali sono i **contro** di usare R?
 
 -   All'inizio, è **difficile da imparare**, soprattutto se non avete mai programmato prima. Bisogna essere pazienti e non arrabbiarsi, piano piano ce la si fa.
 
--   Nella vostra vita professionale potreste far parte di una minoranza, e dovete esser pronti ad essere un po' dei lupi solitari
+-   Nella vostra vita professionale potreste far parte di una **minoranza**, e dovete esser pronti ad essere un po' dei lupi solitari
 
     -   In azienda si usa di più **Tableau, SPSS o Python**
 
@@ -43,9 +41,8 @@ Quali sono i contro di usare R?
 
     -   Se vi studiate questo libro (che è fatto super bene ed è **gratis e disponibile online**) non vi ferma nessuno. Ed è molto facile da studiare da soli. Iniziamo!
 
-    ```{=html}
     <!-- -->
-    ```
+
     -   Disponibile, in una versione leggermente più datata, [anche in italiano](#0).
 
 ### Nota sull'utilizzo di ChatGPT e simili
@@ -54,11 +51,21 @@ Sentitevi liberi di utilizzare **ChatGPT** (o qualunque altro modello di intelli
 
 In particolare, ogni volta che riscontrate un errore:
 
--   Prima, leggete l'errore dal vostro computer e vedete se riuscite a capire cosa succede
+-   Prima, **leggete l'errore** dal vostro computer e vedete se riuscite a capire cosa succede
 
--   Poi, chiedete a ChatGPT di spiegarvi l'errore, con una formula come [questa](https://chatgpt.com/share/ef997ffe-4d29-4372-a399-94158ba7c856).
+-   Poi, chiedete a ChatGPT di **spiegarvi l'errore**, con una formula come [questa](https://chatgpt.com/share/ef997ffe-4d29-4372-a399-94158ba7c856).
 
-    -   Ricordate di dare più **contesto** possibile a ChatGPT nel prompt!
+    -   Ricordate di dare più **contesto** possibile a ChatGPT nel prompt! In particolare, includete sempre:
+
+        -   Una descrizione del problema che state cercando di risolvere (date sempre più contesto possibile!)
+
+        <!-- -->
+
+        -   Il codice che avete scritto.
+
+        -   L'errore specifico che avete ricevuto (copiaincollato).
+
+        -   Una richiesta esplicita di aiuto e spiegazione.
 
 -   Se anche dopo la risposta di ChatGPT non siete in grado di capire l'errore, scrivetemi una mail (gaetano.scaduto\@unimib.it)
 
@@ -70,7 +77,7 @@ In particolare, ogni volta che riscontrate un errore:
 
 -   Questi documenti, che sono slide o dispense, come preferite, contengono porzioni di testo e di codice.
 
--   Sono pensate per essere utilizzate in classe per seguire la lezione o a casa per lo studio individuale, ma è **importante che teniate sempre RStudio aperto** mentre studiate, e facciate andare i comandi che vedete anche sul vostro computer!
+-   Sono pensate per essere utilizzate in classe per seguire la lezione o a casa per lo studio individuale, ma è **importante che teniate sempre RStudio aperto** mentre studiate e seguite, e facciate andare i comandi che vedete anche sul vostro computer!
 
 # Comandi di Base
 
@@ -78,65 +85,96 @@ Iniziamo con alcuni comandi di base in R.
 
 ### Operazioni Aritmetiche
 
+#### Somma
+
 ```{r}
-# Somma
 5 + 3
 
-# Sottrazione
+```
+
+#### Sottrazione
+
+```{r}
 10 - 4
 
-# Moltiplicazione
-7 * 3
+```
 
-# Divisione
+#### Moltiplicazione
+
+```{r}
+7 * 3
+```
+
+#### Divisione
+
+```{r}
 20 / 5
 ```
 
 ### Operatori di Confronto
 
+#### Uguaglianza (==)
+
 ```{r}
-# Uguaglianza
 5 == 5
 
-# Differenza
+```
+
+#### Differenza (!=)
+
+```{r}
+
 5 != 3
 
-# Maggiore di
+```
+
+#### Maggiore/Minore di
+
+```{r}
 7 > 5
 
-# Minore di
+
 3 < 8
 
-# Maggiore o uguale a
+
+```
+
+#### Maggiore o uguale/Minore o uguale a
+
+```{r}
 6 >= 6
 
 # Minore o uguale a
 4 <= 9
-
 ```
 
 ### Operatori Logici
 
 Gli operatori logici ci permettono di combinare più condizioni.
 
+#### AND (&)
+
 ```{r}
-
-# AND
 TRUE & FALSE
+```
 
-# OR
+#### OR (\|)
+
+```{r}
 TRUE | FALSE
+```
 
-# NOT
+#### NOT (!)
+
+```{r}
 !TRUE
-
 ```
 
 # Strutture di dati
 
 ### Strutture di Dati: Variabili
 
-Variabili In R, possiamo memorizzare valori in **variabili**.
+In R, possiamo memorizzare valori in **variabili**.
 
 ```{r}
 # Variabile numerica
@@ -181,7 +219,7 @@ Posso fare tante cose con queste due variabili:
 pigreco+costante_gravitazionale
 ```
 
--   pigreco+costante_gravitazionaleMoltiplicarle
+-   Moltiplicarle
 
     ```{r}
     pigreco*costante_gravitazionale
@@ -195,7 +233,7 @@ pigreco>costante_gravitazionale
 
 ### Strutture di Dati: Vettori
 
--   Un vettore è una **sequenza di dati** dello stesso tipo (esempio: numerico, testuale).
+-   Un vettore è una **sequenza di dati** dello stesso tipo (es: numerici, testuali).
 
 -   Per creare un vettore si utilizza il comando ***c(),***
 
@@ -231,6 +269,12 @@ E se volessi sommarli...
 voti[1]+voti[3]
 ```
 
+O fare la media...
+
+```{r}
+(voti[1]+voti[3])/2
+```
+
 -   I vettori possono anche avere valori non numerici.
 
 Ad esempio, possiamo creare un vettore di stringhe
@@ -248,13 +292,19 @@ esiti[3]
 esiti[c(1,3)]
 ```
 
+Ma occhio! Non essendo dati testuali, non possiamo sommare gli elementi di questo vettore o ci verrà comunicato un errore!
+
 # Il Dataframe
 
-Un DataFrame è una struttura di dati fondamentale in R. È molto simile a una tabella di dati.
+Un **datatrame** è una struttura di dati fondamentale in R. È molto simile a una tabella di dati. Esso è composto da righe e colonne (o variabili). Si tratta della struttura dati più importante per chiunque faccia statistica
 
--   Ogni colonna di un DataFrame può contenere un diverso tipo di dati (numerico, stringhe, ecc.), e tutte le colonne **devono avere la stessa lunghezz**a.
+-   Ogni colonna di un dataframe può contenere un **diverso tipo di dati** (numerico, stringhe, ecc.)
+-   Tutte le colonne **devono avere la stessa lunghezz**a
+-   Le colonne **hanno un nome**, dato dal nome della variabile che le compone.
+    -   Le righe, generalmente, non hanno un nome, ma sono indicate solo con numeri interi (1,2,3...)
+-   **Non c'è un limite** al numero di righe e colone del dataframe
 
-Potete creare un DataFrame utilizzando la funzione ***data.frame()***. Ecco un esempio:
+Potete creare un DataFrame utilizzando la funzione ***data.frame()*** specificando poi i nomi e i valori in ogni colonna. Ecco un esempio:
 
 ```{r}
 # Creazione di un DataFrame con dati fittizi
@@ -264,6 +314,8 @@ dati <- data.frame(
   città = c("Roma", "Milano", "Napoli")
 )
 ```
+
+In questo caso abbiamo creato un dataset con tre righe e tre colonne.
 
 Per visualizzare il dataframe abbiamo varie opzioni, la più completa è la funzione ***View()**,* che vi apre direttamente una finestra su Rstudio dove potete esplorare l'intero dataframe
 
@@ -278,9 +330,17 @@ In alternativa, un modo pratico per capire la struttura del dataset è visualizz
 head(dati)
 ```
 
-### Accesso ai Dati in un DataFrame
+Infine, possiamo anche avere informazioni generali sulle variabili nel dataframe utilizzando il comando ***summary()***
 
-Potete accedere ai dati in un DataFrame in vari modi:
+```{r}
+summary(data)
+```
+
+**Nota:** per il resto della lezione, utilizzerò i termini *dataframe* e *dataset* come sinonimi, anche se tecnicamente sono cose leggermente diverse. A noi non importa.
+
+### Accesso ai dati in un dataframe
+
+Potete accedere ai dati in un dataframe in vari modi:
 
 #### Accesso tramite nome della colonna
 
@@ -304,7 +364,7 @@ dati[1, 2]
 
 ```
 
-**NOTA BENE:** il primo indice è sempre l'indice di **riga**, il secondo indice è sempre l'indice di **colonna**
+**NOTA BENE:** il primo elemento è sempre l'indice di **riga**, il secondo elemento è sempre l'indice di **colonna**
 
 ### Modifica di un DataFrame
 
@@ -341,7 +401,7 @@ View(dati)
 
 ### Operazioni sui DataFrame
 
-I DataFrame in R supportano una vasta gamma di operazioni. Ecco alcune delle più comuni:
+I dataframe in R supportano una vasta gamma di operazioni. Ecco alcune delle più comuni:
 
 #### Filtrare i dati
 
@@ -405,3 +465,5 @@ print(nomi_città)
 
 
 ```
+
+Per oggi è tutto! Ma non dimenticate di vedere il file degli esercizi!s
