@@ -382,7 +382,7 @@ Ovviamente, per chi lo volesse fare da sè, è apprezzato (classica cosa per cui
 #### Riepilogo delle Differenze
 
 | Caratteristica | Istogramma                                          | Barplot                                            |
-|------------------|---------------------------|---------------------------|
+|----------------|-----------------------------------------------------|----------------------------------------------------|
 | Tipo di Dati   | Continua                                            | Categoriale o discreta                             |
 | Asse X         | Intervalli della variabile continua                 | Categorie                                          |
 | Asse Y         | Frequenza delle osservazioni                        | Frequenza o valore associato alle categorie        |
@@ -440,7 +440,7 @@ Esistono anche soluzioni più belle e carine di questa (come il tileplot). Se av
 # Ricapitolando
 
 | Tipo di Grafico          | Quando Usarlo                                                            | Pro                                                                                                                                                                               | Contro                                                                                                           |
-|-----------------|-----------------|---------------------|-----------------|
+|--------------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | Istogramma               | Per visualizzare la distribuzione di una variabile continua              | Facile da interpretare, mostra la distribuzione                                                                                                                                   | La scelta dei bin può influenzare l'interpretazione e la leggibilità                                             |
 | Barplot                  | Per confrontare la frequenza o il valore tra categorie discrete          | Facile da interpretare, ideale per confronti tra categorie                                                                                                                        | Diventa complesso da ordinare ed eitchettare usando ggplot2                                                      |
 | Scatterplot              | Per esaminare la relazione tra due variabili continue                    | Mostra chiaramente la relazione tra due variabili, facilita l'identificazione di correlazioni e outliers. È anche possibile fittare una bella e convincente retta di regressione. | Può diventare affollato con molti punti, bisogna giocare bene con forme, colori e traparenza                     |
