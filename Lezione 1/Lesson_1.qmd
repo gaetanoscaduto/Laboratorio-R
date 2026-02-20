@@ -1,0 +1,492 @@
+---
+title: "R and Data Analysis: A Gentle Introduction"
+author: "Gaetano Scaduto"
+date: "`r Sys.Date()`"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction to R for Data Analysis
+
+## Why learn R?
+
+The first question you might ask yourselves is: ***why should I want to learn R?***
+
+-   It is highly **in demand** and **valued** in the job market.
+
+-   Learning R **frees you** from the need to learn any other statistical software (perhaps except Python).
+
+-   Unlike most others, it is **free.**
+
+-   It can **make easier** a whole range of tasks you may not even know you'll face yet in your professional (academic) life.
+
+What are the **downsides** of using R?
+
+-   At first, it's **hard to learn** (and that's why you're here!), especially if you've never programmed before. You need to be patient and not get angry; step by step you'll make it.
+
+-   In your professional life you might be in a **minority**, and you should be ready to be a bit of a lone wolf
+
+    -   In companies, **Tableau, SPSS or Python** are used more
+
+    -   In universities, **Stata** is used more (although it's changing, luckily)
+
+    -   In the public sector, **Excel/SPSS** are used more
+
+-   Maybe we'll all be swept away by AI, who knows
+
+    -   In general, the act of coding has completely changed, also for social sciences, in the last two years
+
+-   **Tip:** [this book](https://r4ds.hadley.nz/); available also [in Italian](https://it.r4ds.hadley.nz/) (although not updated version)
+
+    -   If you study this book (which is really well made and is **free and available online**) nothing can stop you. And it's very easy to study on your own. Let's begin!
+
+<!-- ### Note on using ChatGPT and similar tools -->
+
+<!-- Feel free to use **ChatGPT** (or any other AI model) to solve any problem that might come up with R. -->
+
+<!-- In particular, each time you encounter an error: -->
+
+<!-- -   First, **read the error** on your computer and see if you can understand what's going on -->
+
+<!-- -   Then, ask ChatGPT to **explain the error**, with a prompt like [questa](https://chatgpt.com/share/ef997ffe-4d29-4372-a399-94158ba7c856). -->
+
+<!--     -   Remember to give as much **context** as possible to ChatGPT in the prompt! In particular, always include: -->
+
+<!--         -   A description of the problem you're trying to solve (always give as much context as possible!) -->
+
+<!--         \<!-- --\> -->
+
+<!--         -   The code you wrote. -->
+
+<!--         -   The specific error you received (copied and pasted). -->
+
+<!--         -   An explicit request for help and explanation. -->
+
+<!-- -   If even after ChatGPT's reply you're still unable to understand the error, send me an email (gaetano.scaduto\@unimib.it) -->
+
+<!-- -   **NOTE**: you may use ChatGPT at any stage of this lab. It's absolutely not a problem; in fact I encourage you to do so. -->
+
+<!-- ```          -->
+
+<!-- <!-- -   Nevertheless, I want you to be **transparent** every time you use it; it's good to indicate it explicitly (for example, with a #comment) and to be able to **explain** how the code works. -->
+
+<!-- ## Note on these documents -->
+
+<!-- ``` -->
+
+<!-- -   These documents—call them slides or handouts, as you prefer—contain portions of text and code. -->
+
+<!-- -   They are designed to be used in class to follow the lesson or at home for self-study, but it's **important that you always keep RStudio open** while you study and follow along, and that you run the commands you see on your own computer too! -->
+
+# Basic Commands
+
+Let's start by opening R Studio and observe some basic commands. But first: what is RStudio and how is it different from R?
+
+-   R is the programming language
+
+-   RStudio is the most intuitive and straightforward program through which you can write and execute R code
+
+-   Can you use R outside of RStudio? Yes. Should you? No.
+
+In the default RStudio (Posit) layout, the four panes are:
+
+-   **Source (Editor)** — where you write and edit scripts, R Markdown, and notebooks. *(Top‑left by default)*
+
+-   **Console** — where R code runs and outputs; also includes **Terminal** and **Jobs** tabs. *(Bottom‑left)*
+
+-   **Environment/History** — shows your objects (data, functions) and command history; may also include **Connections** and **Build** tabs. *(Top‑right)*
+
+-   **Files/Plots/Packages/Help/Viewer** — file browser, plot output, package manager, documentation, and HTML viewer. *(Bottom‑right)*
+
+The following commands can be executed either in the console or the Editor. If you write it in the console, it gets executed the moment you press "Enter". If you write it in the script, you need to run it through its command (click on "Run" or highlight and Ctrl+Enter).
+
+### Arithmetic Operations
+
+#### Addition
+
+```{r}
+5 + 3
+
+```
+
+#### Subtraction
+
+```{r}
+10 - 4
+
+```
+
+#### Multiplication
+
+```{r}
+7 * 3
+```
+
+#### Division
+
+```{r}
+20 / 5
+```
+
+### Comparison Operators
+
+#### Equality (==)
+
+```{r}
+5 == 5
+
+```
+
+#### Inequality (!=)
+
+```{r}
+
+5 != 3
+
+```
+
+#### Greater than / Less than
+
+```{r}
+7 > 5
+
+
+3 < 8
+
+
+```
+
+#### Greater than or equal to / Less than or equal to
+
+```{r}
+6 >= 6
+
+# Minore o uguale a
+4 <= 9
+```
+
+### Logical (boolean) Operators
+
+Logical operators allow us to combine multiple conditions.
+
+#### AND (&)
+
+```{r}
+TRUE & FALSE
+```
+
+#### OR (\|)
+
+```{r}
+TRUE | FALSE
+```
+
+#### NOT (!)
+
+```{r}
+!TRUE
+```
+
+# Data Structures
+
+### Data Structures: Variables
+
+In R, we can store values in **variables**.
+
+```{r}
+# Numerical Variable
+answer <- 42
+
+# String
+Question <- "What is the answer to the fundamental question about life, the universe, and everything?"
+```
+
+When you store a value in a variable, it will appear in your RStudio **environment** (usually, top right)
+
+![](images/clipboard-3992396063.png)
+
+Once a value is saved in a variable, any time you need to "summon" the value stored in the variable, just call the variable's name itself.
+
+For example, if I wanted to ask [this question](https://it.wikipedia.org/wiki/Risposta_alla_domanda_fondamentale_sulla_vita,_l'universo_e_tutto_quanto)....
+
+```{r}
+question
+```
+
+I could then give myself an answer by calling the variable ***risposta***
+
+```{r}
+answer
+```
+
+In addition, I can perform with variables all the operations we talked about earlier.
+
+For example, let's consider these two variables.
+
+```{r}
+pi=3.1415
+gravity=9.81
+```
+
+I can do many things with these two variables:
+
+-   add them
+
+```{r}
+pi+gravity
+```
+
+-   Multiply them
+
+    ```{r}
+    pi*gravity
+    ```
+
+-   Compare them...
+
+```{r}
+pi < costante_gravitazionale
+```
+
+### Data Structures: Vectors
+
+-   A vector is a **sequence of data** of the same type (e.g., numeric, text).
+
+-   To create a vector use the ***c(),***
+
+    -   inserting the elements of the vector separated by commas.
+
+```{r}
+# numerical vector
+votes <- c(30, 17, 24, 15, 19)
+
+votes
+
+```
+
+-   To call a specific value inside the vector, use **square brackets**
+
+    -   Inside them you indicate, with a number, the position of the element you want to extract.
+
+For example, if I wanted to know what the first element of the ***votes,*** vector contains, I would write:
+
+```{r}
+votes[1]
+```
+
+Whereas if I wanted the first and the third element, we should put a vector inside the vector...
+
+```{r}
+votes[c(1,3)]
+```
+
+And if I wanted to add them...
+
+```{r}
+votes[1]+votes[3]
+```
+
+Or compute the average...
+
+```{r}
+(votes[1]+votes[3])/2
+```
+
+-   Vectors can also have non-numeric values.
+
+For example, we can create a vector of strings
+
+```{r}
+# String vectors
+outcomes <- c("Approved", "Failed", "Approved", "Failed", "Approved")
+```
+
+Again, we can call individual elements just as before.
+
+```{r}
+outcomes[1]
+outcomes[3]
+outcomes[c(1,3)]
+```
+
+But watch out! Because these are textual data, we can't add the elements of this vector or R will return an error!
+
+# The Dataframe
+
+A **dataframe** is a fundamental data structure in R. It is very similar to a data table. It is composed of rows and columns (or variables). It is the most important data structure for anyone doing statistics.
+
+-   Each column of a dataframe can contain a **different type of data** (numeric, strings, etc.)
+-   All columns **must have the same length**
+-   Columns **have a name**, given by the name of the variable they contain.
+    -   Rows generally don't have a name; they're indicated only with integers (1,2,3...)
+-   There is **no limit** to the number of rows and columns of the dataframe
+
+You can create a DataFrame using the ***data.frame()*** function by specifying the names and values in each column. Here's an example:
+
+```{r}
+# Dataset creation
+
+data <- data.frame(
+  names = c("Anna", "Luca", "Marco"),
+  age = c(28, 34, 29),
+  city = c("Roma", "Milano", "Napoli")
+)
+```
+
+In this case we've created a dataset with three rows and three columns.
+
+To view the dataframe we have various options; the most complete is the ***View(),*** function, which directly opens a window in RStudio where you can explore the entire dataframe
+
+```{r}
+View(data)
+
+```
+
+Alternatively, a practical way to understand the structure of the dataset is to display only the first rows with the *head()* command.
+
+```{r}
+head(data)
+```
+
+Finally, we can also get general information about the variables in the dataframe using the ***summary()*** command
+
+```{r}
+summary(data)
+```
+
+**Note:** for the rest of the lesson, I'll use the terms *dataframe* and *dataset* as synonyms, even though technically they're slightly different things. We don't care.
+
+### Accessing data in a dataframe
+
+You can access data in a dataframe in various ways:
+
+#### Access via column name
+
+```{r}
+# Visualize the "name" column
+		data$names  
+# Visualize the "age" column
+	data$age
+
+```
+
+#### Access via indices
+
+```{r}
+# Display the first column 
+	data[ ,1]  
+# Display the first row 
+	data[1, ]  
+# Display the item in the first row and second column 
+	data[1, 2] 
+
+```
+
+**IMPORTANT:** the first element is always the **row** index, the second element is always the **column** index
+
+### Modifying a DataFrame
+
+You can add or modify columns and rows in a dataframe.
+
+#### Add a column
+
+```{r}
+# Add a new column "gender" 
+	data$gender = c("F", "M", "M")  
+# View the updated DataFrame 
+	View(data) 
+```
+
+#### Modify an existing column
+
+```{r}
+# Edit the "age" column 
+	data$age = c(29, 35, 30)  
+	# Display the updated DataFrame 
+	View(data) 
+```
+
+#### Add a row
+
+To add a row, you need to create a new dataset and then use the ***rbind()*** function.
+
+```{r}
+# Create a new row 
+	new_row = data.frame(names = "Giulia", 
+	                     age= 26, 
+	                     city = "Torino", 
+	                     gender = "F")  
+# Add the new row to the existing DataFrame 
+	data = rbind(data, new_row)  # View the updated DataFrame 
+	View(data)
+```
+
+### Operations on DataFrames
+
+Dataframes in R support a wide range of operations. Here are some of the most common:
+
+#### Filter data
+
+```{r}
+# Filter rows where "age" is greater than 30 
+	filtered_data = data[data$age == 30, ] 
+	print(filtered_data) 
+
+```
+
+#### Sort data
+
+```{r}
+# Sort the data according to the "age" column. 
+	sorted_data = data[order(data$age), ] 
+	print(sorted_data) 
+```
+
+#### Select specific columns
+
+```{r}
+# Select only the columns "names" and "age". 
+	data_selected = data[, c("names", "age")] 
+	print(data_selected) 
+
+```
+
+# Practical Example
+
+Let's put everything we've learned together in a practical example.
+
+```{r}
+# Creating a DataFrame with information about survey participants
+
+participants = data.frame(
+  ID = 1:5,
+  Name = c("Alice", "Bob", "Charlie", "David", "Eve"),   
+  Age = c(24, 30, 22, 28, 35),   
+  City = c("Roma", "Milano", "Napoli", "Torino", "Firenze"),   
+  Gender = c("F", "M", "M", "M", "F") 
+  ) 
+
+# Display the DataFrame 
+print(participants)  
+
+# Filter participants over the age of 25 
+participants_over_25 = participants[participants$Age > 25, ] 
+
+print(participants_over_25)  
+
+# Sort participants by age 
+
+ordered_participants = participants[order(participants$Age), ] 
+
+print(ordered_participants)  
+
+# Select only the names and towns of participants 
+names_city = participants[, c("Name", "City")] 
+
+print(names_city) 
+```
+
+That's all for this lesson. Let's go to the next one!

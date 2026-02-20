@@ -466,4 +466,4 @@ print(nomi_città)
 
 ```
 
-Per oggi è tutto! Ma non dimenticate di vedere il file degli esercizi!s
+Per oggi è tutto! Ma non dimenticate di vedere il file degli esercizi!
