@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Gaetano Scaduto">
+
+<title>Lezione 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Lesson_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Lesson_2_files/libs/quarto-html/quarto.js"></script>
+<script src="Lesson_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="Lesson_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Lesson_2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Lesson_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Lesson_2_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Lesson_2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Lesson_2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Lesson_2_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lezione 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Gaetano Scaduto </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="lets-work-with-a-real-dataset" class="level1">
+<h1>Let’s work with a real dataset</h1>
+<ul>
+<li><p>R is based on an open source philosophy.</p></li>
+<li><p>Some things you have <em>included in the basic package</em></p></li>
+<li><p>You can download other items from a <a href="https://cran.r-project.org/">online archive</a> called the C-RAN (The Comprehensive R Archive Network).</p></li>
+<li><p>These are “<strong>packages</strong>” that allow you to expand the basic functionality of R.</p></li>
+</ul>
+<p>Before using a package for the first time, <strong>only for the first time</strong>, you must install it.</p>
+<ul>
+<li><p>To install it, you need an <strong>internet connection</strong> and to run the command <strong><em>install.packages()</em></strong>.</p></li>
+<li><p>We are now going to use three packages</p></li>
+<li><p><strong>rio</strong>, <strong>ggplot2</strong>, and <strong>texreg</strong></p></li>
+</ul>
+<p>To install packages, use the following syntax.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rio"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"texreg"</span>) <span class="co">#Note: this, after the hash sign, is a comment.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Comments are portions of text that the computer does not look at; they are used by us humans to enrich the code </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#with explanations and notes.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After installing, you must call the library.</p>
+<ul>
+<li>This must be done <strong>every time you restart R</strong> with the <strong>library()</strong> command.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Version:  1.39.4
+Date:     2024-07-23
+Author:   Philip Leifeld (University of Manchester)
+
+Consider submitting praise using the praise or praise_interactive functions.
+Please cite the JSS article in your publications -- see citation("texreg").</code></pre>
+</div>
+</div>
+<p>One last refinement. I want numbers with decimal points, not scientific notation.</p>
+<p>To do this, I tell R this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-a-dataframe" class="level1">
+<h1>Importing a dataframe</h1>
+<p>The rio library (which stands for R Input/Output) allows you to import files into R without any hassle.</p>
+<p>In our case, I have prepared a dataset with the <strong>results of the 2022 elections in all Italian municipalities</strong>, plus some other information.</p>
+<ul>
+<li>This dataset is based on <a href="https://elezionistorico.interno.gov.it/">open data from the Ministry of the Interior</a>, which I manipulated a little and combined with some statistics from ISTAT.</li>
+</ul>
+<p>To import it into R, you need to do the following:</p>
+<ul>
+<li><p>Create a folder somewhere on your computer and give it a name.</p></li>
+<li><p>Put the dataset uploaded online into that folder.</p></li>
+<li><p>You can also just copy and paste it into that folder..</p></li>
+<li><p>After that, you will need to tell R that you are working in that folder.</p>
+<ul>
+<li><p>To do this, you will need to execute the <strong><em>setwd()</em></strong> command (which stands for “set working directory”) and enter the <strong>folder path</strong> in quotation marks.**.</p>
+<ul>
+<li><p>To find the folder path, if you have Windows, simply right-click on the folder and then select ‘Copy as path’.</p></li>
+<li><p>If you have a Mac, search Google/AI for ‘how to copy Mac folder path’, but I think you can see it in ‘properties’ by right-clicking or something like that.</p></li>
+<li><p>Once you have set the working directory, all the files you save from R will be found there!</p>
+<ul>
+<li>If you really can’t manage it: <strong>exit R and</strong> <strong>double-click on the dataset file</strong>. If you want to learn how to use R, this isn’t a good idea, but just this once, it’s fine…</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Please note! If you are using Windows, what will be copied will look like this:</strong></p>
+<ul>
+<li><p>“C:\Users\gasca\OneDrive - Università della Strada\Desktop\cartella esempio”</p></li>
+<li><p>R per uno strano motivo vuole che le stanghette non siano “\” ma “/”, quindi voi dovrete cambiarle manualmente e scrivere invece</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/gaetanoscaduto/OneDrive - Università della Strada/Desktop/cartella esempio"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul></li>
+</ul>
+<p>Quindi il comando sarà:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/gaetanoscaduto/OneDrive - Università della Strada/Desktop/cartella esempio"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once you have done this, run the following command (do not forget the quotation marks ““) to import the dataframe into your environment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">import</span>(<span class="st">"ris2022_lezione.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>NOTE: if you double-clicked on the dataset from the folder (for those who did not know how to copy the folder path), do not execute the above command!</li>
+</ul>
+<p>In this case, you are telling R:</p>
+<ul>
+<li><p>Take the object named in the way inside the quotation marks (from the folder we mentioned earlier), import it into R and call it, from now on, “data”.</p></li>
+<li><p>“data” is the name we will use to refer to our dataframe.</p></li>
+<li><p>Please note that you must always include the name of the file you wish to import, <strong>including the extension (.RDS)</strong>.</p></li>
+<li><p>With the <strong><em>import()</em></strong> function (which is part of rio), you can easily import virtually any type of existing data file (this include .dta, .csv, .sav, .xlsx, and so on).</p></li>
+</ul>
+<p>Note: this dataset has some missing data. For simplicity, we will work with the complete data. I will therefore remove all rows that have “missing data” with this command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> data[<span class="fu">complete.cases</span>(data), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lets-take-a-peek-at-the-data" class="level1">
+<h1>Let’s take a peek at the data</h1>
+<p>Now we want to take a peek at the data. We can do this with the command <strong><em>head().</em></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  istat          comune  regione provincia num_residenti superficie  Lega    Fi
+1  1001          AGLIE' Piemonte        TO          2545      13.28 12.15  9.57
+2  1002         AIRASCA Piemonte        TO          3633      15.70 10.31  7.77
+3  1003    ALA DI STURA Piemonte        TO           459      46.09 14.35 11.39
+4  1004 ALBIANO D'IVREA Piemonte        TO          1638      11.73 10.30  7.61
+5  1006          ALMESE Piemonte        TO          6355      17.91  7.83  6.02
+6  1007         ALPETTE Piemonte        TO           235       5.65 11.35  1.42
+     PD   AVS   M5S  Aziv   Fdi areeint least_voted  macroarea most_voted
+1 15.06  2.83  9.48 10.32 30.62       C         AVS North-West        fdi
+2 18.85  3.14 15.47  6.11 26.97       C         AVS North-West        fdi
+3 13.08  2.95  7.59  4.64 30.80       E         AVS North-West        fdi
+4 15.81  2.81  6.67  5.97 42.39       C         AVS North-West        fdi
+5 18.64  5.34 14.78  8.61 22.58       C         AVS North-West        fdi
+6  3.55 21.28  5.67  5.67 24.11       E          Fi North-West        fdi</code></pre>
+</div>
+</div>
+<p>If you want to see the data in more detail, run the command <strong><em>View(data)</em></strong> on R and you can freely navigate the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we want a quick summary of what the dataset contains, we can run the following command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     istat           comune            regione           provincia        
+ Min.   :  1001   Length:7700        Length:7700        Length:7700       
+ 1st Qu.: 16171   Class :character   Class :character   Class :character  
+ Median : 42039   Mode  :character   Mode  :character   Mode  :character  
+ Mean   : 45932                                                           
+ 3rd Qu.: 75002                                                           
+ Max.   :111107                                                           
+ num_residenti       superficie           Lega             Fi        
+ Min.   :     29   Min.   :   0.20   Min.   : 0.00   Min.   : 0.000  
+ 1st Qu.:    994   1st Qu.:  11.31   1st Qu.: 6.85   1st Qu.: 6.840  
+ Median :   2438   Median :  22.14   Median :10.80   Median : 8.600  
+ Mean   :   7598   Mean   :  37.68   Mean   :11.46   Mean   : 9.706  
+ 3rd Qu.:   6346   3rd Qu.:  43.59   3rd Qu.:15.24   3rd Qu.:11.090  
+ Max.   :2770226   Max.   :1307.71   Max.   :63.82   Max.   :72.810  
+       PD             AVS              M5S             Aziv       
+ Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+ 1st Qu.:12.60   1st Qu.: 1.780   1st Qu.: 6.21   1st Qu.: 4.170  
+ Median :15.88   Median : 2.610   Median : 9.99   Median : 6.165  
+ Mean   :16.79   Mean   : 2.815   Mean   :13.13   Mean   : 6.350  
+ 3rd Qu.:19.97   3rd Qu.: 3.520   3rd Qu.:18.00   3rd Qu.: 7.980  
+ Max.   :67.33   Max.   :36.360   Max.   :85.12   Max.   :55.660  
+      Fdi          areeint          least_voted         macroarea        
+ Min.   : 0.00   Length:7700        Length:7700        Length:7700       
+ 1st Qu.:23.86   Class :character   Class :character   Class :character  
+ Median :29.83   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :29.12                                                           
+ 3rd Qu.:34.59                                                           
+ Max.   :65.79                                                           
+  most_voted       
+ Length:7700       
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   </code></pre>
+</div>
+</div>
+<p>Now let’s take a look at some specific statistics.</p>
+<ul>
+<li><p>To do this, we will need to directly “call” the columns of the dataset.</p></li>
+<li><p>The operator <strong><em>$</em></strong> is used after the dataset name (e.g.&nbsp;<strong><em>data$istat</em></strong>).</p></li>
+</ul>
+<pre><code>-   Rstudio will then suggest the names of the available columns so that you can access them.</code></pre>
+<p>Let’s calculate some basic statistics as an example.</p>
+<ul>
+<li><p>Like the average number of residents in the municipalities in our dataset.</p>
+<ul>
+<li>To calculate the mean, use the command <em><strong>mean()</strong>.</em></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>num_residenti)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7598.046</code></pre>
+</div>
+</div>
+<p>Or the median, with the command <strong><em>median()</em></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(data<span class="sc">$</span>num_residenti)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2438.5</code></pre>
+</div>
+</div>
+<p>Or we ask: “In the municipality where the Five Star Movement received the highest percentage, how much did it get?”</p>
+<ul>
+<li>The answer is given by the <strong><em>max()</em></strong> command on the variable (column) that represents the percentage of votes for the Five Star Movement (in our case, the variable “M5S”).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(data<span class="sc">$</span>M5S)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 85.12</code></pre>
+</div>
+</div>
+<p>What if we want the minimum instead? We use the <strong><em>min()</em></strong> command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(data<span class="sc">$</span>M5S)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>Now we wonder whether, for example, the average number of votes obtained by Forza Italia in the municipalities of Calabria differs from that in the municipalities of Umbria.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data[data<span class="sc">$</span>regione <span class="sc">==</span> <span class="st">"Calabria"</span>, ]<span class="sc">$</span>Fi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.14832</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data[data<span class="sc">$</span>regione <span class="sc">==</span> <span class="st">"Umbria"</span>, ]<span class="sc">$</span>Fi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.315217</code></pre>
+</div>
+</div>
+</section>
+<section id="tables" class="level1">
+<h1>Tables</h1>
+<ul>
+<li><p>Tables can be very useful for understanding how our data is distributed.</p></li>
+<li><p>We can create tables with one variable or with two variables, and in both cases we use the “table” command.</p></li>
+<li><p>Let’s see, for example, how the variable <strong><em>areeint</em></strong> is distributed.</p></li>
+</ul>
+<pre><code>-   (Istat internal area code - indicates the remoteness of the municipality: A is a central municipality, F is a remote municipality).</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>areeint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   A    B    C    D    E    F 
+ 180   59 3770 1863 1474  354 </code></pre>
+</div>
+</div>
+<ul>
+<li>If we want to create a table of two crossed variables, just put them in the <strong><em>table()</em></strong> command separated by a comma.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+                A    B    C    D    E    F
+  Center       38    6  394  319  190   21
+  North-East   45    9  738  237  203   38
+  North-West   47   28 1873  576  326   66
+  South        50   16  765  731  755  229</code></pre>
+</div>
+</div>
+<p>This table is not very informative, so we can consider creating a table with proportions using the following command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+                        A            B            C            D            E
+  Center     0.0049350649 0.0007792208 0.0511688312 0.0414285714 0.0246753247
+  North-East 0.0058441558 0.0011688312 0.0958441558 0.0307792208 0.0263636364
+  North-West 0.0061038961 0.0036363636 0.2432467532 0.0748051948 0.0423376623
+  South      0.0064935065 0.0020779221 0.0993506494 0.0949350649 0.0980519481
+            
+                        F
+  Center     0.0027272727
+  North-East 0.0049350649
+  North-West 0.0085714286
+  South      0.0297402597</code></pre>
+</div>
+</div>
+<p>It’s impossible to understand! Too many decimal places!</p>
+<ul>
+<li><p>We solve this with the “round” function, which allows us to round the decimals to as many digits as we want.</p>
+<ul>
+<li>We only want two digits.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint)), <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+                A    B    C    D    E    F
+  Center     0.00 0.00 0.05 0.04 0.02 0.00
+  North-East 0.01 0.00 0.10 0.03 0.03 0.00
+  North-West 0.01 0.00 0.24 0.07 0.04 0.01
+  South      0.01 0.00 0.10 0.09 0.10 0.03</code></pre>
+</div>
+</div>
+<ul>
+<li><p>These are the percentages across the entire table.</p></li>
+<li><p>Perhaps it would be more useful to have them by row or by column.</p></li>
+</ul>
+<pre><code>-   To do this, we need to add an option to prop.table.</code></pre>
+<ul>
+<li><p>1 corresponds to the percentages per row.</p></li>
+<li><p>2 to the percentages per column.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint), <span class="dv">1</span>), <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+                A    B    C    D    E    F
+  Center     0.04 0.01 0.41 0.33 0.20 0.02
+  North-East 0.04 0.01 0.58 0.19 0.16 0.03
+  North-West 0.02 0.01 0.64 0.20 0.11 0.02
+  South      0.02 0.01 0.30 0.29 0.30 0.09</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(data<span class="sc">$</span>macroarea, data<span class="sc">$</span>areeint), <span class="dv">2</span>), <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+                A    B    C    D    E    F
+  Center     0.21 0.10 0.10 0.17 0.13 0.06
+  North-East 0.25 0.15 0.20 0.13 0.14 0.11
+  North-West 0.26 0.47 0.50 0.31 0.22 0.19
+  South      0.28 0.27 0.20 0.39 0.51 0.65</code></pre>
+</div>
+</div>
+</section>
+<section id="regression" class="level1">
+<h1>Regression!</h1>
+<ul>
+<li><p>Finiamo la nostra carrellata con qualche regressione.</p></li>
+<li><p>Sappiamo tutti cos’è la regressione?</p>
+<ul>
+<li>For those who need a refresher, I made a quick guide for another course a few years ago (in Italian). You can download it here. <a href="https://github.com/gaetanoscaduto/teaching/blob/main/Regressione%20PP/Dispensa.pdf">qui</a>.</li>
+</ul></li>
+<li><p>Here we will only perform linear regressions.</p></li>
+<li><p>Let’s suppose we want to try to build a model that explains the vote for the Five Star Movement.</p></li>
+<li><p>Linear regressions are performed using the “lm” command.</p>
+<ul>
+<li><p>The first <em>argument</em> of “lm” is <strong><em>data=</em></strong> followed by the name of your dataset (which in our case is also called <strong><em>data</em></strong>).</p></li>
+<li><p>A comma must then be placed to separate the first and second <em>arguments.</em></p></li>
+<li><p>Then put the dependent variable, your y</p></li>
+<li><p>After that, insert a tilde ~ (Alt+126).</p></li>
+<li><p>Finally, the independent variables.</p></li>
+<li><p>Save the entire result in an object</p></li>
+<li><p>Observe the results of your regression by placing the object in a <strong><em>screenreg()</em></strong> function.</p></li>
+</ul></li>
+<li><p>NOTE: <strong><em>screenreg()</em></strong> only works if you have called the <em>texreg</em> library first with the <strong><em>library()</em></strong> command!</p></li>
+<li><p>Let’s start with a very famous model: “the Five Star Movement are the party of the South”.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>regr1 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(regr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+================================
+                     Model 1    
+--------------------------------
+(Intercept)            12.60 ***
+                       (0.19)   
+macroareaNorth-East    -6.37 ***
+                       (0.25)   
+macroareaNorth-West    -5.30 ***
+                       (0.21)   
+macroareaSouth         10.87 ***
+                       (0.22)   
+--------------------------------
+R^2                     0.63    
+Adj. R^2                0.63    
+Num. obs.            7700       
+================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Notice: these are conditional means! You could also run:</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#mean(data[data$macroarea == "South", ]$M5S) - mean(data[data$macroarea == "Center", ]$M5S) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Quick question: what is the reference category?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Notice: these are conditional means! You could also run:</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data[data<span class="sc">$</span>macroarea <span class="sc">==</span> <span class="st">"South"</span>, ]<span class="sc">$</span>M5S) <span class="sc">-</span> <span class="fu">mean</span>(data[data<span class="sc">$</span>macroarea <span class="sc">==</span> <span class="st">"Center"</span>, ]<span class="sc">$</span>M5S) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.8721</code></pre>
+</div>
+</div>
+<p>Now let’s try a more sophisticated model, which also takes peripherality into account.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>regr2 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea <span class="sc">+</span> areeint)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(regr2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+================================
+                     Model 1    
+--------------------------------
+(Intercept)            14.77 ***
+                       (0.45)   
+macroareaNorth-East    -6.59 ***
+                       (0.24)   
+macroareaNorth-West    -5.65 ***
+                       (0.21)   
+macroareaSouth         11.45 ***
+                       (0.21)   
+areeintB                1.30    
+                       (0.84)   
+areeintC               -1.23 ** 
+                       (0.43)   
+areeintD               -2.40 ***
+                       (0.44)   
+areeintE               -3.83 ***
+                       (0.44)   
+areeintF               -6.24 ***
+                       (0.52)   
+--------------------------------
+R^2                     0.65    
+Adj. R^2                0.65    
+Num. obs.            7700       
+================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p>Finally, let’s also try to include the number of residents, which is a continuous variable, and the area of the municipality, which is also a continuous variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>regr3 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data=</span>data, M5S <span class="sc">~</span> macroarea <span class="sc">+</span> areeint <span class="sc">+</span> num_residenti <span class="sc">+</span> superficie)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(regr3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+================================
+                     Model 1    
+--------------------------------
+(Intercept)            13.44 ***
+                       (0.51)   
+macroareaNorth-East    -6.51 ***
+                       (0.24)   
+macroareaNorth-West    -5.47 ***
+                       (0.22)   
+macroareaSouth         11.51 ***
+                       (0.21)   
+areeintB                2.09 *  
+                       (0.85)   
+areeintC               -0.16    
+                       (0.47)   
+areeintD               -1.35 ** 
+                       (0.48)   
+areeintE               -2.81 ***
+                       (0.48)   
+areeintF               -5.23 ***
+                       (0.55)   
+num_residenti           0.00 ***
+                       (0.00)   
+superficie              0.00 ** 
+                       (0.00)   
+--------------------------------
+R^2                     0.65    
+Adj. R^2                0.65    
+Num. obs.            7700       
+================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p>This concludes our second part. Once again, do not be alarmed. R is challenging. My advice is to be patient, do not get frustrated, and make the most of artificial intelligence to understand errors and how it works. After a while, you will succeed, and it will be worth it.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
