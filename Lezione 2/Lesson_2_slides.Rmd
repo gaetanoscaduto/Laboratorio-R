@@ -1,0 +1,349 @@
+---
+title: "Lesson 2"
+author: "Gaetano Scaduto"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+# Let's work with a real dataset
+
+-   R is based on an open source philosophy.
+
+-   Some things you have *included in the basic package*
+
+-   You can download other items from a [online archive](https://cran.r-project.org/) called the C-RAN (The Comprehensive R Archive Network).
+
+-   These are "**packages**" that allow you to expand the basic functionality of R.
+
+---
+
+Before using a package for the first time, **only for the first time**, you must install it.
+
+-   To install it, you need an **internet connection** and to run the command ***install.packages()***.
+
+-  We are now going to use three packages
+
+-   **rio**, **ggplot2**, and **texreg**
+
+To install packages, use the following syntax.
+
+```{r, eval=FALSE}
+install.packages("rio")
+install.packages("ggplot2")
+install.packages("texreg") #Note: this, after the hash sign, is a comment.
+#Comments are portions of text that the computer does not look at; they are used by us humans to enrich the code 
+#with explanations and notes.
+```
+
+---
+
+After installing, you must call the library.
+
+-   This must be done **every time you restart R** with the **library()** command.
+
+```{r, warning = F}
+
+library(rio)
+library(ggplot2)
+library(texreg)
+```
+
+One last refinement. I want numbers with decimal points, not scientific notation.
+
+To do this, I tell R this.
+
+```{r, warning = F}
+options(scipen = 999)
+```
+
+# Importing a dataframe
+
+The rio library (which stands for R Input/Output) allows you to import files into R without any hassle.
+
+In our case, I have prepared a dataset with the **results of the 2022 elections in all Italian municipalities**, plus some other information.
+
+-   This dataset is based on [open data from the Ministry of the Interior](https://elezionistorico.interno.gov.it/), which I manipulated a little and combined with some statistics from ISTAT.
+
+---
+
+To import it into R, you need to do the following:
+
+-   Create a folder somewhere on your computer and give it a name.
+
+-   Put the dataset uploaded online into that folder.
+
+-   You can also just copy and paste it into that folder..
+
+-   After that, you will need to tell R that you are working in that folder.
+
+    -   To do this, you will need to execute the ***setwd()*** command (which stands for "set working directory") and enter the **folder path** in quotation marks.**.
+
+        -   To find the folder path, if you have Windows, simply right-click on the folder and then select 'Copy as path'.
+
+        -   If you have a Mac, search Google/AI for 'how to copy Mac folder path', but I think you can see it in 'properties' by right-clicking or something like that.
+
+        -   Once you have set the working directory, all the files you save from R will be found there!
+
+            -   If you really can't manage it: **exit R and** **double-click on the dataset file**. If you want to learn how to use R, this isn't a good idea, but just this once, it's fine...
+
+---
+
+-   **Please note! If you are using Windows, what will be copied will look like this:**
+
+    -   "C:\\Users\\gasca\\OneDrive - Università della Strada\\Desktop\\cartella esempio"
+
+    -   R per uno strano motivo vuole che le stanghette non siano "\\" ma "/", quindi voi dovrete cambiarle manualmente e scrivere invece
+
+        ```{r, eval=FALSE}
+        setwd("C:/Users/gaetanoscaduto/OneDrive - Università della Strada/Desktop/cartella esempio")
+        ```
+
+Quindi il comando sarà:
+
+```{r, eval = FALSE}
+
+setwd("C:/Users/gaetanoscaduto/OneDrive - Università della Strada/Desktop/cartella esempio")
+```
+
+```{rm echo=F}
+setwd("C:/Users/100722gsc/OneDrive - Erasmus University Rotterdam/Postdoc/Teaching/Laboratorio-R/Lezione 2")
+```
+
+---
+
+Once you have done this, run the following command (do not forget the quotation marks "") to import the dataframe into your environment.
+
+```{r, warning = F}
+data = import("ris2022_lezione.RDS")
+```
+
+-   NOTE: if you double-clicked on the dataset from the folder (for those who did not know how to copy the folder path), do not execute the above command!
+
+In this case, you are telling R:
+
+-   Take the object named in the way inside the quotation marks (from the folder we mentioned earlier), import it into R and call it, from now on, "data".
+
+-   "data" is the name we will use to refer to our dataframe.
+
+-   Please note that you must always include the name of the file you wish to import, **including the extension (.RDS)**.
+
+-   With the ***import()*** function (which is part of rio), you can easily import virtually any type of existing data file (this include .dta, .csv, .sav, .xlsx, and so on).
+
+---
+
+Note: this dataset has some missing data. For simplicity, we will work with the complete data. I will therefore remove all rows that have "missing data" with this command.
+
+```{r, warning = F}
+data = data[complete.cases(data), ]
+```
+
+# Let's take a peek at the data
+
+Now we want to take a peek at the data. We can do this with the command ***head().***
+
+```{r, warning = F}
+head(data)
+```
+
+If you want to see the data in more detail, run the command ***View(data)*** on R and you can freely navigate the dataset.
+
+---
+
+If we want a quick summary of what the dataset contains, we can run the following command.
+
+```{r, warning = F}
+summary(data)
+```
+
+---
+
+Now let's take a look at some specific statistics.
+
+-   To do this, we will need to directly "call" the columns of the dataset.
+
+  -   The operator ***\$*** is used after the dataset name (e.g. ***data\$istat***).
+
+    -   Rstudio will then suggest the names of the available columns so that you can access them.
+
+Let's calculate some basic statistics as an example.
+
+-   Like the average number of residents in the municipalities in our dataset.
+
+    -   To calculate the mean, use the command ***mean()**.*
+
+```{r, warning = F}
+mean(data$num_residenti)
+```
+
+Or the median, with the command ***median()***
+
+```{r, warning = F}
+median(data$num_residenti)
+```
+
+---
+
+Or we ask: "In the municipality where the Five Star Movement received the highest percentage, how much did it get?"
+
+-   The answer is given by the ***max()*** command on the variable (column) that represents the percentage of votes for the Five Star Movement (in our case, the variable "M5S").
+
+```{r, warning = F}
+max(data$M5S)
+```
+
+What if we want the minimum instead? We use the ***min()*** command.
+
+```{r}
+min(data$M5S)
+```
+
+---
+
+Now we wonder whether, for example, the average number of votes obtained by Forza Italia in the municipalities of Calabria differs from that in the municipalities of Umbria.
+
+```{r, warning = F}
+mean(data[data$regione == "Calabria", ]$Fi)
+
+mean(data[data$regione == "Umbria", ]$Fi)
+```
+
+# Tables
+
+-   Tables can be very useful for understanding how our data is distributed.
+
+-   We can create tables with one variable or with two variables, and in both cases we use the "table" command.
+
+  -   Let's see, for example, how the variable ***areeint*** is distributed.
+
+    -   (Istat internal area code - indicates the remoteness of the municipality: A is a central municipality, F is a remote municipality).
+
+```{r, warning = F}
+table(data$areeint)
+```
+
+---
+
+-   If we want to create a table of two crossed variables, just put them in the ***table()*** command separated by a comma.
+
+```{r, warning = F}
+table(data$macroarea, data$areeint)
+
+```
+
+This table is not very informative, so we can consider creating a table with proportions using the following command.
+
+```{r, warning = F}
+prop.table(table(data$macroarea, data$areeint))
+```
+
+---
+
+It's impossible to understand! Too many decimal places!
+
+-   We solve this with the "round" function, which allows us to round the decimals to as many digits as we want.
+
+    -   We only want two digits.
+
+```{r, warning = F}
+round(prop.table(table(data$macroarea, data$areeint)), digits = 2)
+```
+
+---
+
+-   These are the percentages across the entire table.
+
+  -   Perhaps it would be more useful to have them by row or by column.
+
+    -   To do this, we need to add an option to prop.table.
+
+-   1 corresponds to the percentages per row.
+
+-   2 to the percentages per column.
+
+```{r, warning = F}
+round(prop.table(table(data$macroarea, data$areeint), 1), digits = 2)
+
+```
+
+```{r, warning = F}
+round(prop.table(table(data$macroarea, data$areeint), 2), digits = 2)
+
+```
+
+# Regression!
+
+-   Finiamo la nostra carrellata con qualche regressione.
+
+-   Sappiamo tutti cos'è la regressione?
+
+    -   For those who need a refresher, I made a quick guide for another course a few years ago (in Italian). You can download it here. [qui](https://github.com/gaetanoscaduto/teaching/blob/main/Regressione%20PP/Dispensa.pdf).
+
+  -   Here we will only perform linear regressions.
+
+-   Let's suppose we want to try to build a model that explains the vote for the Five Star Movement.
+
+---
+
+-   Linear regressions are performed using the "lm" command.
+
+    -   The first *argument* of "lm" is ***data=*** followed by the name of your dataset (which in our case is also called ***data***).
+
+    -   A comma must then be placed to separate the first and second *arguments.*
+
+    -   Then put the dependent variable, your y
+
+    -   After that, insert a tilde \~ (Alt+126).
+
+    -   Finally, the independent variables.
+
+    -   Save the entire result in an object
+
+    -   Observe the results of your regression by placing the object in a ***screenreg()*** function.
+
+-   NOTE: ***screenreg()*** only works if you have called the *texreg* library first with the ***library()*** command!
+
+---
+
+-   Let's start with a very famous model: "the Five Star Movement are the party of the South".
+
+```{r, warning = F}
+regr1 = lm(data=data, M5S ~ macroarea)
+screenreg(regr1)
+
+#Notice: these are conditional means! You could also run:
+#mean(data[data$macroarea == "South", ]$M5S) - mean(data[data$macroarea == "Center", ]$M5S) 
+```
+
+
+Quick question: what is the reference category?
+
+```{r}
+#Notice: these are conditional means! You could also run:
+mean(data[data$macroarea == "South", ]$M5S) - mean(data[data$macroarea == "Center", ]$M5S) 
+```
+
+---
+
+Now let's try a more sophisticated model, which also takes peripherality into account.
+
+``` {r, warning = F}
+regr2 = lm(data=data, M5S ~ macroarea + areeint)
+screenreg(regr2)
+```
+
+---
+
+Finally, let's also try to include the number of residents, which is a continuous variable, and the area of the municipality, which is also a continuous variable.
+
+```{r, warning = F}
+regr3 = lm(data=data, M5S ~ macroarea + areeint + num_residenti + superficie)
+screenreg(regr3)
+```
+
+---
+
+This concludes our second part. Once again, do not be alarmed. R is challenging. My advice is to be patient, do not get frustrated, and make the most of artificial intelligence to understand errors and how it works. After a while, you will succeed, and it will be worth it.
